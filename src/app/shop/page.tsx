@@ -19,7 +19,6 @@ import {
   TextField,
   Badge,
   MenuItem,
- 
   Pagination,
 } from "@mui/material";
 import { FilterList } from "@mui/icons-material";
@@ -297,7 +296,7 @@ const ShopPage: React.FC = () => {
   const cities = selectedCountry ? citiesByCountry[selectedCountry] : [];
 
   const handleCountryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedCountry(e.target.value);
+    setSelectedCountry(e.target.value as Country);
     setSelectedCity(""); // Réinitialiser la sélection de ville
   };
   const [filters, setFilters] = useState({
@@ -510,12 +509,7 @@ const ShopPage: React.FC = () => {
         </Grid>
         {/* Pagination */}
         <div className="flex justify-center mt-4">
-          <Pagination
-            count={10}
-            page={1}  
-            
-            color="primary"
-          />
+          <Pagination count={10} page={1} color="primary" />
         </div>
       </Box>
     </Box>
