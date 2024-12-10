@@ -13,10 +13,17 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
+
 import ProductImageGallery from "@/components/sections/ProductDetails/ProductImageGallery";
 import ProductInfo from "@/components/sections/ProductDetails/ProductInfo";
 import ProductReviews from "@/components/sections/ProductDetails/ProductReview";
 import RelatedProducts from "@/components/sections/ProductDetails/RelatedProducts";
+
+interface ProductImageGalleryProps {
+  images: string[];
+  alt: string;
+  sx?: any;
+}
 
 const ProductDetailsPage: React.FC = () => {
   // Exemple de données de produit (normalement récupérées depuis une API)
@@ -106,11 +113,6 @@ const ProductDetailsPage: React.FC = () => {
     returns: "Retours gratuits sous 30 jours.",
   };
 
-  const [age, setAge] = React.useState("");
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value);
-  };
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>

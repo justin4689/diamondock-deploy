@@ -107,8 +107,7 @@ export default function OtpPage() {
             {otp.map((digit, index) => (
               <input
                 key={index}
-                ref={(ref) => (inputRefs.current[index] = ref)}
-                type="text"
+                ref={(el) => { inputRefs.current[index] = el }}                type="text"
                 inputMode="numeric"
                 maxLength={1}
                 value={digit}

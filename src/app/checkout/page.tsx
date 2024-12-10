@@ -66,9 +66,10 @@ const CheckoutPage: React.FC = () => {
     ),
     shipping: 5000,
     discount: 0,
-    get total() {
-      return this.subtotal + this.shipping - this.discount;
-    },
+    total: 0,
+    updateTotal() {
+      this.total = this.subtotal + this.shipping - this.discount;
+    }
   };
 
   // Étapes du checkout
@@ -79,8 +80,7 @@ const CheckoutPage: React.FC = () => {
     // Simulation de validation du coupon
     if (couponCode === "PROMO10") {
       cartSummary.discount = cartSummary.subtotal * 0.1;
-      cartSummary.total =
-        cartSummary.subtotal + cartSummary.shipping - cartSummary.discount;
+      cartSummary.updateTotal();
     }
   };
 

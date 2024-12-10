@@ -19,9 +19,7 @@ import {
   TextField,
   Badge,
   MenuItem,
-  Select,
-  InputLabel,
-  FormControl,
+ 
   Pagination,
 } from "@mui/material";
 import { FilterList } from "@mui/icons-material";
@@ -327,7 +325,7 @@ const ShopPage: React.FC = () => {
             fullWidth
             size="small"
             value={selectedCountry}
-            onChange={(e) => setSelectedCountry(e.target.value)}
+            onChange={(e) => setSelectedCountry(e.target.value as Country)}
             variant="outlined"
             sx={{ mb: 2 }}
           >

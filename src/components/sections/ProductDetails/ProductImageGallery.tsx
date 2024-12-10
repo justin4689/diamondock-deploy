@@ -12,11 +12,13 @@ import Image from "next/image";
 interface ProductImageGalleryProps {
   images: string[];
   alt: string;
+  sx?: any;
 }
 
 const ProductImageGallery: React.FC<ProductImageGalleryProps> = ({
   images,
   alt,
+  sx,
 }) => {
   const [selectedImage, setSelectedImage] = useState<string>(images[0]);
   const [openDialog, setOpenDialog] = useState<boolean>(false);

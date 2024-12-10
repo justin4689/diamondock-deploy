@@ -23,11 +23,12 @@ interface Product {
 
 interface RelatedProductsProps {
   products: Product[];
+  sx?: any;
 }
 
-const RelatedProducts: React.FC<RelatedProductsProps> = ({ products }) => {
+const RelatedProducts: React.FC<RelatedProductsProps> = ({ products, sx }) => {
   return (
-    <Box sx={{ p: 2 }}>
+    <Box sx={{ p: 2, ...sx }}>
       <Typography variant="h5" gutterBottom>
         Produits Similaires
       </Typography>
