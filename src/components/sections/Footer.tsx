@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
         {/* Logo and Description */}
         <div>
           <img src="/logo.png" alt="logo" className="h-10 md:h-12" />
-          <p className="mb-4">
+          <p className="mb-4 text-xs md:text-sm">
             Nous sommes bien plus qu’un simple gestionnaire de réseaux sociaux. Nous sommes votre allié pour vous propulser aux sommets sur le digital.
           </p>
           <button className="bg-gray-600 text-white py-2 px-4 rounded">
@@ -19,10 +19,10 @@ const Footer: React.FC = () => {
 
         {/* Quick Links */}
         <div>
-          <h3 className="font-bold mb-4">LIENS RAPIDES</h3>
+          <h3 className="font-bold mb-4 ">LIENS RAPIDES</h3>
           <ul>
             {['Boutique', 'Connexion / Inscription', 'Suivez Votre Commande', 'FAQs', 'Devenir un Vendeur', 'Contactez Nous', 'Carrières'].map((item) => (
-              <li key={item} className="mb-2">
+              <li key={item} className="mb-2 text-xs lg:">
                 <FaArrowRight className="inline text-blue-500 mr-2" />
                 {item}
               </li>
@@ -53,23 +53,23 @@ const Footer: React.FC = () => {
         {/* Contact Info */}
         <div>
           <h3 className="font-bold mb-4">CONTACTEZ-NOUS</h3>
-          <p className="mb-2">
+          <p className="mb-2 text-xs lg:text-sm">
             <FaPhoneAlt className="inline text-blue-500 mr-2" />
             +1 (469) 509 05 85
           </p>
-          <p className="mb-2">
+          <p className="mb-2 text-xs lg:text-sm">
             <FaPhoneAlt className="inline text-blue-500 mr-2" />
             +225 05 01 74 03 03
           </p>
-          <p className="mb-2">
+          <p className="mb-2 text-xs lg:text-sm">
             <FaEnvelope className="inline text-blue-500 mr-2" />
             customers@diamonddock.com
           </p>
-          <p className="mb-2">
+          <p className="mb-2 text-xs lg:text-sm">
             <FaMapMarkerAlt className="inline text-blue-500 mr-2" />
             Texas, United States.
           </p>
-          <p className="mb-2">
+          <p className="mb-2 text-xs lg:text-sm">
             <FaMapMarkerAlt className="inline text-blue-500 mr-2" />
             Abidjan, Côte d’Ivoire.
           </p>

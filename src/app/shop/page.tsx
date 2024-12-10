@@ -452,7 +452,7 @@ const ShopPage: React.FC = () => {
         {/* Grille de produits */}
         <Grid container spacing={2}>
           {products.map((product) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
+            <Grid item xs={6} sm={4} md={4} lg={3} key={product.id}>
               <Card key={product.id} className="relative group rounded-lg">
                 <Badge
                   className="absolute top-3 right-5"
@@ -474,20 +474,20 @@ const ShopPage: React.FC = () => {
                     />
                   </div>
 
-                  <h3 className="font-semibold text-lg mb-2 text-center flex-grow">
+                  <h3 className="font-semibold text-xs md:text-lg mb-2">
                     {product.name}
                   </h3>
 
                   <div className="flex items-center justify-between mb-2">
-                    <div className="flex flex-col">
-                      <span className="text-black font-bold text-xl">
+                    <div className="flex flex-col"> 
+                      <span className="text-black  text-xs font-bold md:text-xl">
                         {product.price}CFA
                       </span>
-                      <span className="ml-2 text-gray-400 line-through text-sm">
+                      <span className="ml-2 text-gray-400 line-through text-xs md:text-sm">
                         {product.oldPrice}CFA
                       </span>
                     </div>
-                    <div className="text-gray-500 text-sm">{product.brand}</div>
+                    <div className="text-gray-500 text-[9px] md:text-sm">{product.brand}</div>
                   </div>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <Rating value={product.rating} readOnly size="small" />
@@ -497,9 +497,9 @@ const ShopPage: React.FC = () => {
                   </Box>
 
                   <div className="flex justify-center mt-4">
-                    <button className="bg-orange-500 text-[10px] font-bold text-white px-2 py-2 rounded-full hover:bg-orange-600 flex items-center">
+                    <button className="bg-orange-500 text-[10px] md:text-sm font-bold text-white px-2 py-2 rounded-full hover:bg-orange-600 flex items-center">
                       AJOUTER AU PANIER
-                      <ShoppingCart size={20} className="ml-1" />
+                     
                     </button>
                   </div>
                 </CardContent>
