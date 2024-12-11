@@ -141,62 +141,64 @@ const ProductDetailsPage: React.FC = () => {
             />
           </Paper>
         </Grid>
-        {/* Informations du produit */}
+
+        {/* Section livraison - Maintenant visible sur mobile */}
         <Grid item xs={12} md={3}>
-          <Paper elevation={1} sx={{ p: 2, backgroundColor: "#f9f9f9" }}>
-            <Typography variant="h6" gutterBottom>
+          <Paper 
+            elevation={1} 
+            sx={{ 
+              p: 2, 
+              backgroundColor: "#f9f9f9",
+              position: { xs: 'fixed', md: 'static' },
+              bottom: { xs: 0, md: 'auto' },
+              left: { xs: 0, md: 'auto' },
+              right: { xs: 0, md: 'auto' },
+              zIndex: { xs: 1000, md: 1 },
+              width: { xs: '100%', md: 'auto' },
+              borderRadius: { xs: '20px 20px 0 0', md: '4px' },
+              boxShadow: { 
+                xs: '0px -4px 10px rgba(0, 0, 0, 0.1)', 
+                md: '0px 2px 4px rgba(0, 0, 0, 0.1)' 
+              }
+            }}
+          >
+            <Typography variant="h6" gutterBottom sx={{ display: { xs: 'none', md: 'block' } }}>
               LIVRAISON & RETOURS
             </Typography>
-            <Divider className="md:mt-2" />
-            <Typography variant="subtitle2" gutterBottom>
-              Livraison rapide en 48h Abidjan.
-            </Typography>
-            <Divider className="md:mt-2" />
-            <Typography variant="h6" gutterBottom>
-              Choisissez le lieu
-            </Typography>
-            <div>
-              <label
-                htmlFor="Regions"
-                className="block text-sm font-medium text-gray-900"
-              >
-                {" "}
-                Regions
-              </label>
-              <select
-                name="Regions"
-                id="Regions"
-                className="mt-2 w-full outline-none rounded-lg border border-gray-300 bg-white p-2 text-gray-700 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 sm:text-sm"
-              >
-                <option value="">Choisissez...</option>
-                <option value="JM">Abidjan-Lagunes</option>
-                <option value="SRV">Comoe-Marahoué</option>
-                <option value="JH">Mankono-Moyen-Comoe</option>
-                <option value="BBK">Denguélé</option>
-                <option value="AK">Savanes</option>
-              </select>
-            </div>
-            <div className="mt-4">
-              <label
-                htmlFor="Villes ou Communes"
-                className="block text-sm font-medium text-gray-900"
-              >
-                {" "}
-                Villes ou Communes
-              </label>
+            <Divider sx={{ display: { xs: 'none', md: 'block' }, mb: 2 }} />
+            
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <div>
+                <label className="block text-sm font-medium text-gray-900">
+                  Région de livraison
+                </label>
+                <select
+                  className="mt-2 w-full outline-none rounded-lg border border-gray-300 bg-white p-2 text-gray-700 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 sm:text-sm"
+                >
+                  <option value="">Sélectionnez une région</option>
+                  <option value="JM">Abidjan-Lagunes</option>
+                  <option value="SRV">Comoe-Marahoué</option>
+                  <option value="JH">Mankono-Moyen-Comoe</option>
+                  <option value="BBK">Denguélé</option>
+                  <option value="AK">Savanes</option>
+                </select>
+              </div>
 
-              <select
-                name="Villes ou Communes"
-                id="Villes ou Communes"
-                className="mt-2 w-full rounded-lg border outline-none border-gray-300 bg-white p-2 text-gray-700 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 sm:text-sm"
-              >
-                <option value="">Choisissez...</option>
-                <option value="JM">Cocody</option>
-                <option value="SRV">Plateau</option>
-                <option value="JH">Djorobité</option>
-                <option value="BBK">Yopougon</option>
-              </select>
-            </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-900">
+                  Ville/Commune
+                </label>
+                <select
+                  className="mt-2 w-full rounded-lg border outline-none border-gray-300 bg-white p-2 text-gray-700 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 sm:text-sm"
+                >
+                  <option value="">Sélectionnez une ville</option>
+                  <option value="JM">Cocody</option>
+                  <option value="SRV">Plateau</option>
+                  <option value="JH">Djorobité</option>
+                  <option value="BBK">Yopougon</option>
+                </select>
+              </div>
+            </Box>
           </Paper>
         </Grid>
 

@@ -20,9 +20,13 @@ import {
   Badge,
   MenuItem,
   Pagination,
+  Drawer,
+  Button,
 } from "@mui/material";
 import { FilterList } from "@mui/icons-material";
 type Country = keyof typeof citiesByCountry; // Type dérivé des clés de citiesByCountry
+import { LocationOn, Category,FormatSize , AttachMoney , Grading} from '@mui/icons-material';
+
 
 // Constantes et données
 const categories: string[] = [
@@ -290,6 +294,20 @@ const citiesByCountry = {
 };
 
 const ShopPage: React.FC = () => {
+  const [drawerStates, setDrawerStates] = useState({
+    country: false,
+    city: false,
+    categories: false,
+    brands: false,
+    price: false,
+    size: false,
+  });
+  const toggleDrawer = (drawer: keyof typeof drawerStates) => {
+    setDrawerStates(prev => ({
+      ...prev,
+      [drawer]: !prev[drawer]
+    }));
+  };
   const [selectedCountry, setSelectedCountry] = useState<Country | "">(""); // Inclure une chaîne vide pour le cas initial
 
   const [selectedCity, setSelectedCity] = React.useState("");
@@ -441,13 +459,207 @@ const ShopPage: React.FC = () => {
       </Paper>
 
       {/* Contenu principal */}
-      <Box sx={{ flex: 1, p: 3 }}>
+      <Box sx={{ flex: 1, p: 3 , mt: 7 }}>
         {/* Bouton filtre mobile */}
-        <Box sx={{ display: { xs: "block", md: "none" }, mb: 2 }}>
-          <IconButton>
-            <FilterList />
-          </IconButton>
+       
+        <Box sx={{ 
+          display: { xs: "flex", md: "none"  }, 
+          mb: 2,
+          gap: 1,
+          overflowX: 'auto',
+          pb: 1,
+          flexWrap: 'wrap',
+        }}>
+          <Button 
+            variant="outlined" 
+            startIcon={<LocationOn />}
+            onClick={() => toggleDrawer('country')}
+            size="small"
+          >
+            Pays
+          </Button>
+          <Button 
+            variant="outlined" 
+            startIcon={<LocationOn />}
+            onClick={() => toggleDrawer('city')}
+            size="small"
+          >
+            Ville
+          </Button>
+          <Button 
+            variant="outlined" 
+            startIcon={<Category />}
+            onClick={() => toggleDrawer('categories')}
+            size="small"
+          >
+            Catégories
+          </Button>
+          <Button 
+            variant="outlined" 
+            startIcon={<Grading />}
+            onClick={() => toggleDrawer('brands')}
+            size="small"
+          >
+            Marques
+          </Button>
+          <Button 
+            variant="outlined" 
+            startIcon={<AttachMoney />}
+            onClick={() => toggleDrawer('price')}
+            size="small"
+          >
+            Prix
+          </Button>
+          <Button 
+            variant="outlined" 
+            startIcon={<FormatSize />}
+            onClick={() => toggleDrawer('size')}
+            size="small"
+          >
+            Taille
+          </Button>
         </Box>
+         {/* Drawers mobiles */}
+         <Drawer
+          anchor="bottom"
+          open={drawerStates.country}
+          onClose={() => toggleDrawer('country')}
+        >
+          <Box sx={{ p: 2 }}>
+            <Typography gutterBottom variant="h6">Pays</Typography>
+            <TextField
+              select
+              fullWidth
+              size="small"
+              value={selectedCountry}
+              onChange={(e) => setSelectedCountry(e.target.value as Country)}
+              variant="outlined"
+            >
+              {countries.map((country) => (
+                <MenuItem key={country} value={country}>
+                  {country}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Box>
+        </Drawer>
+        <Drawer
+          anchor="bottom"
+          open={drawerStates.city}
+          onClose={() => toggleDrawer('city')}
+        >
+          <Box sx={{ p: 2 }}>
+            <Typography gutterBottom variant="h6">Ville</Typography>
+            <TextField
+              select
+              fullWidth
+              size="small"
+              value={selectedCity}
+              onChange={(e) => setSelectedCity(e.target.value)}
+              variant="outlined"
+              disabled={!selectedCountry}
+            >
+              {cities.map((city) => (
+                <MenuItem key={city} value={city}>
+                  {city}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Box>
+        </Drawer>
+        <Drawer
+          anchor="bottom"
+          open={drawerStates.categories}
+          onClose={() => toggleDrawer('categories')}
+        >
+          <Box sx={{ p: 2 }}>
+            <Typography gutterBottom variant="h6">Catégories</Typography>
+            {categories.map((category) => (
+              <Link
+                key={category}
+                href="#"
+                underline="hover"
+                onClick={() => {}}
+                sx={{
+                  display: "block",
+                  mb: 1,
+                  color: "text.secondary",
+                }}
+              >
+                {category}
+              </Link>
+            ))}
+          </Box>
+        </Drawer>
+        <Drawer
+          anchor="bottom"
+          open={drawerStates.brands}
+          onClose={() => toggleDrawer('brands')}
+        >
+          <Box sx={{ p: 2 }}>
+            <Typography gutterBottom variant="h6">Marques</Typography>
+            <FormGroup>
+              {brands.map((brand) => (
+                <FormControlLabel
+                  key={brand}
+                  control={<Checkbox />}
+                  label={brand}
+                />
+              ))}
+            </FormGroup>
+          </Box>
+        </Drawer>
+        
+        <Drawer
+          anchor="bottom"
+          open={drawerStates.price}
+          onClose={() => toggleDrawer('price')}
+        >
+          <Box sx={{ p: 2 }}>
+            <Typography gutterBottom variant="h6">Prix</Typography>
+            <Slider
+              value={filters.priceRange}
+              valueLabelDisplay="auto"
+              min={0}
+              max={500}
+            />
+            <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
+              <TextField
+                label="Min"
+                value={filters.priceRange[0]}
+                variant="outlined"
+                size="small"
+                type="number"
+              />
+              <TextField
+                label="Max"
+                value={filters.priceRange[1]}
+                variant="outlined"
+                size="small"
+                type="number"
+              />
+            </Box>
+          </Box>
+        </Drawer>
+        <Drawer
+          anchor="bottom"
+          open={drawerStates.size}
+          onClose={() => toggleDrawer('size')}
+        >
+          <Box sx={{ p: 2 }}>
+            <Typography gutterBottom variant="h6">Taille</Typography>
+            <FormGroup>
+              {sizes.map((size) => (
+                <FormControlLabel
+                  key={size}
+                  control={<Checkbox />}
+                  label={size}
+                />
+              ))}
+            </FormGroup>
+          </Box>
+        </Drawer>
+
 
         {/* Grille de produits */}
         <Grid container spacing={2}>
