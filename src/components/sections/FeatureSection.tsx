@@ -40,13 +40,13 @@ const FeatureSection: React.FC = () => {
           <Typography 
             variant="h6" 
             component="h3" 
-            className="font-bold text-xs md:text-base lg:text-lg"
+            className="font-bold text-[10px] md:text-base lg:text-lg"
           >
             {feature.title}
           </Typography>
           <Typography 
             variant="body2" 
-            className="text-gray-600 text-xs md:text-sm"
+            className="text-gray-600 text-[8px] md:text-base "
           >
             {feature.description}
           </Typography>
