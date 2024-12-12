@@ -10,6 +10,10 @@ import {
   FaUser,
   FaBars,
   FaTimes,
+  FaShoppingBag,
+  FaStar,
+  FaCog,
+  
 } from "react-icons/fa";
 import {
   Drawer,
@@ -19,7 +23,10 @@ import {
   Divider,
   ListItemButton,
   ListItemIcon,
+  Avatar,
 } from "@mui/material";
+
+import PromoBanner from "./PromoBanner";
 
 import Link from "next/link";
 import {
@@ -57,6 +64,16 @@ type MenuItem = {
   }>;
 };
 
+type Account = {
+  title: string;
+  icon: React.ComponentType<any>;
+};
+
+type Category = {
+  title: string;
+  icon: React.ComponentType<any>;
+};
+
 export const Header: React.FC<NavbarProps> = ({
   cartCount,
   wishlistCount,
@@ -80,9 +97,28 @@ export const Header: React.FC<NavbarProps> = ({
       )}
     </div>
   );
+  const categories: Category[] = [
+    { title: "Électronique", icon: Laptop },
+    { title: "Mode", icon: ShoppingBag },
+    { title: "Maison", icon: Building },
+    { title: "Sports", icon: Users },
+    { title: "Beauté", icon: Diamond },
+    { title: "Musique", icon: Music },
+  ];
+
+  const accounts: Account[] = [
+    { title: "Mes commandes", icon: FaShoppingBag },
+    { title: "Mes favoris", icon: FaHeart },
+    
+    { title: "Mes avis", icon: FaStar },
+    
+    { title: "Mes paramètres", icon: FaCog },
+    
+   
+
+  ];
 
   const menuItems: MenuItem[] = [
-    
     {
       title: "Boutique",
       icon: ShoppingBag,
@@ -113,11 +149,12 @@ export const Header: React.FC<NavbarProps> = ({
       icon: Store,
       items: [],
     },
-  
   ];
 
   return (
     <div className="fixed top-0 left-0 right-0 z-[60] bg-white shadow-sm">
+      <PromoBanner />
+
       <nav className="bg-white">
         {/* Desktop Navigation */}
         <div className="container mx-auto px-4">
@@ -177,11 +214,7 @@ export const Header: React.FC<NavbarProps> = ({
 
             {/* Mobile Menu Button */}
             <div className="lg:hidden flex flex-row space-x-2 items-center">
-              <Tooltip title="Se connecter" placement="bottom">
-                <div className="lg:hidden flex flex-col items-center">
-                  <IconButton icon={FaUser} count={userCount} />
-                </div>
-              </Tooltip>
+              
 
               <div className="lg:hidden flex flex-col items-center">
                 <Tooltip title="Panier" placement="bottom">
@@ -220,35 +253,125 @@ export const Header: React.FC<NavbarProps> = ({
         </div>
 
         {/* Mobile Drawer Menu */}
-        <Drawer anchor="right" open={isDrawerOpen} onClose={handleDrawerToggle}>
-          <List className="w-64 bg-white p-4" disablePadding>
-            <h1>Votre compte </h1>
-            <ListItem onClick={handleDrawerToggle}>
-              <ListItemButton>
-                <ListItemIcon>
-                  <IconButton icon={FaHeart} count={wishlistCount} />
-                </ListItemIcon>
-                <ListItemText primary="Liste d'envies" />
-              </ListItemButton>
-            </ListItem>
 
-            {/* Séparateur */}
-            <Divider />
-            <h1>Navigation des services</h1>
-
-            {menuItems.map((menu, index) => (
-              <div key={index}>
-                <ListItem className="flex items-center ">
+        <Drawer
+          anchor="right"
+          open={isDrawerOpen}
+          onClose={handleDrawerToggle}
+          sx={{
+            "& .MuiDrawer-paper": {
+              width: 300,
+              backgroundColor: "#f5f5f5",
+            },
+          }}
+        >
+          {/* User Profile Section */}
+          <div className="bg-orange-500 text-white p-4 flex items-center">
+            <Avatar
+              alt="User Profile"
+              sx={{
+                width: 56,
+                height: 56,
+                marginRight: 2,
+                bgcolor: "white",
+                color: "orange",
+              }}
+            ></Avatar>
+            <div>
+              <h2 className="text-lg font-bold">Se Connecter</h2>
+              <p className="text-sm">Accédez à votre compte</p>
+            </div>
+          </div>
+          {/* Accounts Section */}
+          <div className=" bg-gray-100">
+            <h3 className="text-lg font-semibold px-4 text-gray-700">
+              <Link href="/">Accueil</Link>
+            </h3>
+          </div>
+          <List>
+            {accounts.map((account, index) => (
+              <React.Fragment key={index}>
+                <ListItem disablePadding>
                   <ListItemButton>
                     <ListItemIcon>
-                      <menu.icon />
+                      <account.icon className="text-gray-600" />
                     </ListItemIcon>
-                    <ListItemText primary={menu.title} />
+                    <ListItemText primary={account.title} />
                   </ListItemButton>
                 </ListItem>
-              </div>
+                {index < categories.length - 1 && <Divider />}
+              </React.Fragment>
             ))}
           </List>
+
+          {/* Catégories Section */}
+          <div className=" bg-gray-100">
+            <h3 className="text-lg font-semibold px-4 text-gray-700">
+              Catégories
+            </h3>
+          </div>
+          <List>
+            {categories.map((category, index) => (
+              <React.Fragment key={index}>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>
+                      <category.icon className="text-gray-600" />
+                    </ListItemIcon>
+                    <ListItemText primary={category.title} />
+                  </ListItemButton>
+                </ListItem>
+                {index < categories.length - 1 && <Divider />}
+              </React.Fragment>
+            ))}
+          </List>
+
+          {/* Main Menu Items */}
+          <div className="bg-gray-100">
+            <h3 className="text-lg font-semibold px-4 text-gray-700">
+              Nos Plateformes
+            </h3>
+          </div>
+          <List></List>
+          <List>
+            {menuItems.map((item, index) => (
+              <React.Fragment key={index}>
+                <ListItem disablePadding>
+                  <ListItemButton
+                    onClick={() => {
+                      /* Handle navigation */
+                    }}
+                  >
+                    <ListItemIcon>
+                      <item.icon />
+                    </ListItemIcon>
+                    <ListItemText primary={item.title} />
+                    {item.title === "Mes Favoris" && wishlistCount > 0 && (
+                      <span className="bg-orange-500 text-white rounded-full px-2 py-1 text-xs">
+                        {wishlistCount}
+                      </span>
+                    )}
+                    {item.title === "Panier" && cartCount > 0 && (
+                      <span className="bg-orange-500 text-white rounded-full px-2 py-1 text-xs">
+                        {cartCount}
+                      </span>
+                    )}
+                  </ListItemButton>
+                </ListItem>
+                {index < menuItems.length - 1 && <Divider />}
+              </React.Fragment>
+            ))}
+          </List>
+
+          {/* Footer Section */}
+          <div className="p-4 bg-white border-t">
+            <button
+              className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition"
+              onClick={handleDrawerToggle}
+            >
+              Fermer
+            </button>
+          </div>
         </Drawer>
       </nav>
     </div>

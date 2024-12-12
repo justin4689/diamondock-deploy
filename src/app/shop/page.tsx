@@ -25,8 +25,13 @@ import {
 } from "@mui/material";
 import { FilterList } from "@mui/icons-material";
 type Country = keyof typeof citiesByCountry; // Type dérivé des clés de citiesByCountry
-import { LocationOn, Category,FormatSize , AttachMoney , Grading} from '@mui/icons-material';
-
+import {
+  LocationOn,
+  Category,
+  FormatSize,
+  AttachMoney,
+  Grading,
+} from "@mui/icons-material";
 
 // Constantes et données
 const categories: string[] = [
@@ -303,9 +308,9 @@ const ShopPage: React.FC = () => {
     size: false,
   });
   const toggleDrawer = (drawer: keyof typeof drawerStates) => {
-    setDrawerStates(prev => ({
+    setDrawerStates((prev) => ({
       ...prev,
-      [drawer]: !prev[drawer]
+      [drawer]: !prev[drawer],
     }));
   };
   const [selectedCountry, setSelectedCountry] = useState<Country | "">(""); // Inclure une chaîne vide pour le cas initial
@@ -459,74 +464,87 @@ const ShopPage: React.FC = () => {
       </Paper>
 
       {/* Contenu principal */}
-      <Box sx={{ flex: 1, p: 3 , mt: 7 }}>
+      <Box
+        sx={{
+          flex: 1,
+          p: 3,
+          mt: {
+            xs: 14, // Petit écran
+            sm: 3, // Grand écran et au-delà
+          },
+        }}
+      >
         {/* Bouton filtre mobile */}
-       
-        <Box sx={{ 
-          display: { xs: "flex", md: "none"  }, 
-          mb: 2,
-          gap: 1,
-          overflowX: 'auto',
-          pb: 1,
-          flexWrap: 'wrap',
-        }}>
-          <Button 
-            variant="outlined" 
+
+        <Box
+          sx={{
+            display: { xs: "flex", md: "none" },
+            mb: 2,
+            gap: 1,
+            overflowX: "auto",
+            pb: 1,
+            flexWrap: "wrap",
+          }}
+        >
+          <Button
+            variant="outlined"
             startIcon={<LocationOn />}
-            onClick={() => toggleDrawer('country')}
+            onClick={() => toggleDrawer("country")}
             size="small"
           >
             Pays
           </Button>
-          <Button 
-            variant="outlined" 
+          <Button
+            variant="outlined"
             startIcon={<LocationOn />}
-            onClick={() => toggleDrawer('city')}
+            onClick={() => toggleDrawer("city")}
             size="small"
           >
             Ville
           </Button>
-          <Button 
-            variant="outlined" 
+          <Button
+            variant="outlined"
             startIcon={<Category />}
-            onClick={() => toggleDrawer('categories')}
+            onClick={() => toggleDrawer("categories")}
             size="small"
           >
             Catégories
           </Button>
-          <Button 
-            variant="outlined" 
+          <Button
+            variant="outlined"
             startIcon={<Grading />}
-            onClick={() => toggleDrawer('brands')}
+            onClick={() => toggleDrawer("brands")}
             size="small"
           >
             Marques
           </Button>
-          <Button 
-            variant="outlined" 
+          <Button
+            variant="outlined"
             startIcon={<AttachMoney />}
-            onClick={() => toggleDrawer('price')}
+            onClick={() => toggleDrawer("price")}
             size="small"
           >
             Prix
           </Button>
-          <Button 
-            variant="outlined" 
+          <Button
+            variant="outlined"
             startIcon={<FormatSize />}
-            onClick={() => toggleDrawer('size')}
+            onClick={() => toggleDrawer("size")}
             size="small"
           >
             Taille
           </Button>
         </Box>
-         {/* Drawers mobiles */}
-         <Drawer
+        {/* Drawers mobiles */}
+        <Drawer
           anchor="bottom"
           open={drawerStates.country}
-          onClose={() => toggleDrawer('country')}
+          onClose={() => toggleDrawer("country")}
         >
           <Box sx={{ p: 2 }}>
-            <Typography gutterBottom variant="h6">Pays</Typography>
+            <Typography gutterBottom variant="h6">
+              Pays
+            </Typography>
             <TextField
               select
               fullWidth
@@ -546,10 +564,12 @@ const ShopPage: React.FC = () => {
         <Drawer
           anchor="bottom"
           open={drawerStates.city}
-          onClose={() => toggleDrawer('city')}
+          onClose={() => toggleDrawer("city")}
         >
           <Box sx={{ p: 2 }}>
-            <Typography gutterBottom variant="h6">Ville</Typography>
+            <Typography gutterBottom variant="h6">
+              Ville
+            </Typography>
             <TextField
               select
               fullWidth
@@ -570,10 +590,12 @@ const ShopPage: React.FC = () => {
         <Drawer
           anchor="bottom"
           open={drawerStates.categories}
-          onClose={() => toggleDrawer('categories')}
+          onClose={() => toggleDrawer("categories")}
         >
           <Box sx={{ p: 2 }}>
-            <Typography gutterBottom variant="h6">Catégories</Typography>
+            <Typography gutterBottom variant="h6">
+              Catégories
+            </Typography>
             {categories.map((category) => (
               <Link
                 key={category}
@@ -594,10 +616,12 @@ const ShopPage: React.FC = () => {
         <Drawer
           anchor="bottom"
           open={drawerStates.brands}
-          onClose={() => toggleDrawer('brands')}
+          onClose={() => toggleDrawer("brands")}
         >
           <Box sx={{ p: 2 }}>
-            <Typography gutterBottom variant="h6">Marques</Typography>
+            <Typography gutterBottom variant="h6">
+              Marques
+            </Typography>
             <FormGroup>
               {brands.map((brand) => (
                 <FormControlLabel
@@ -609,21 +633,25 @@ const ShopPage: React.FC = () => {
             </FormGroup>
           </Box>
         </Drawer>
-        
+
         <Drawer
           anchor="bottom"
           open={drawerStates.price}
-          onClose={() => toggleDrawer('price')}
+          onClose={() => toggleDrawer("price")}
         >
           <Box sx={{ p: 2 }}>
-            <Typography gutterBottom variant="h6">Prix</Typography>
+            <Typography gutterBottom variant="h6">
+              Prix
+            </Typography>
             <Slider
               value={filters.priceRange}
               valueLabelDisplay="auto"
               min={0}
               max={500}
             />
-            <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
+            <Box
+              sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}
+            >
               <TextField
                 label="Min"
                 value={filters.priceRange[0]}
@@ -644,10 +672,12 @@ const ShopPage: React.FC = () => {
         <Drawer
           anchor="bottom"
           open={drawerStates.size}
-          onClose={() => toggleDrawer('size')}
+          onClose={() => toggleDrawer("size")}
         >
           <Box sx={{ p: 2 }}>
-            <Typography gutterBottom variant="h6">Taille</Typography>
+            <Typography gutterBottom variant="h6">
+              Taille
+            </Typography>
             <FormGroup>
               {sizes.map((size) => (
                 <FormControlLabel
@@ -659,7 +689,6 @@ const ShopPage: React.FC = () => {
             </FormGroup>
           </Box>
         </Drawer>
-
 
         {/* Grille de produits */}
         <Grid container spacing={2}>
@@ -691,7 +720,7 @@ const ShopPage: React.FC = () => {
                   </h3>
 
                   <div className="flex items-center justify-between mb-2">
-                    <div className="flex flex-col"> 
+                    <div className="flex flex-col">
                       <span className="text-black  text-xs font-bold md:text-xl">
                         {product.price}CFA
                       </span>
@@ -699,7 +728,9 @@ const ShopPage: React.FC = () => {
                         {product.oldPrice}CFA
                       </span>
                     </div>
-                    <div className="text-gray-500 text-[9px] md:text-sm">{product.brand}</div>
+                    <div className="text-gray-500 text-[9px] md:text-sm">
+                      {product.brand}
+                    </div>
                   </div>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <Rating value={product.rating} readOnly size="small" />
@@ -711,7 +742,6 @@ const ShopPage: React.FC = () => {
                   <div className="flex justify-center mt-4">
                     <button className="bg-orange-500 text-[10px] md:text-sm font-bold text-white px-2 py-2 rounded-full hover:bg-orange-600 flex items-center">
                       AJOUTER AU PANIER
-                     
                     </button>
                   </div>
                 </CardContent>
