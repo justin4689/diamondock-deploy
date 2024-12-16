@@ -30,9 +30,12 @@ const FeaturedProductSlider: React.FC<FeaturedProductSliderProps> = ({
     <div className="w-full bg-red-500 mt-3">
       <div className="w-full max-w-7xl mx-auto p-4 ">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-white">Produits Vedettes</h2>
+          <h2 className="font-bold text-white text-xs sm:text-sm md:text-2xl">
+            Produits Vedettes
+          </h2>
           <button className="text-white hover:underline flex items-center space-x-2">
-            Voir tous <SlArrowRight />
+            Voir tous
+            <SlArrowRight className="hover:rotate-90 transition-all duration-300" />
           </button>
         </div>
 
@@ -88,7 +91,7 @@ const FeaturedProductSlider: React.FC<FeaturedProductSliderProps> = ({
                     />
                   </div>
 
-                  <h3 className="font-semibold text-xs md:text-lg mb-2  ">
+                  <h3 className="font-semibold text-xs md:text-lg mb-2 md:min-h-16 min-h-8 ">
                     {product.name}
                   </h3>
 
@@ -110,7 +113,7 @@ const FeaturedProductSlider: React.FC<FeaturedProductSliderProps> = ({
                       sx={{
                         bgcolor: "#F57C00",
                         mb: 2,
-                        fontSize: { xs: "0.5rem", sm: "0.875rem" }, // Taille du texte
+                        fontSize: { xs: "0.49rem", sm: "0.875rem" }, // Taille du texte
                         py: { xs: 1, sm: 1.5 }, // Padding vertical
                       }}
                     >

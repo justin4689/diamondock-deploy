@@ -69,7 +69,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="hidden lg:flex bg-orange-500 shadow-lg pt-4 md:pt-14 relative z-50">
+    <nav className="hidden lg:flex bg-orange-500 shadow-lg pt-4 md:pt-24 relative z-50">
       <div className="max-w-7xl mx-auto px-4">
       <div className="flex justify-between items-center md:flex-nowrap flex-wrap">
 

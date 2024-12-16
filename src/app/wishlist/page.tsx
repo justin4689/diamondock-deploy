@@ -40,6 +40,8 @@ const WishlistPage: React.FC = () => {
       discount: 15,
       notifications: false,
     },
+    
+    
   ]);
 
   // Fonction pour supprimer un produit

@@ -11,17 +11,17 @@ import { FaShippingFast } from "react-icons/fa";
 
 const features = [
   {
-    icon: <FaShippingFast />,
+    icon: <FaShippingFast className="text-xs md:text-lg lg:text-xl" />,
     title: 'LIVRAISON RAPIDE ET EFFICACE',
     description: 'Dans le monde entier',
   },
   {
-    icon: <FaHeadset fontSize="large" />,
+    icon: <FaHeadset className="text-xs md:text-lg lg:text-xl" />,
     title: 'OFFRE SERVICE 24/7',
     description: 'Nous sommes disponibles 24/7',
   },
   {
-    icon:<IoIosLock  fontSize="large"/>,
+    icon:<IoIosLock  className="text-xs md:text-lg lg:text-xl"/>,
     title: 'PAYEMENTS SECURISES',
     description: 'Payements sécurisés et rapides',
   },
@@ -33,7 +33,7 @@ const FeatureSection: React.FC = () => {
       {features.map((feature, index) => (
         <div key={index} className="text-center">
           <Box display="flex" justifyContent="center" alignItems="center" className="mb-1 md:mb-2">
-            <Avatar className="bg-black p-1 md:p-2 rounded-full w-8 h-8 md:w-12 md:h-12">
+            <Avatar className="bg-black p-1 md:p-2 rounded-full w-8 h-8 md:w-12 md:h-12 ">
               {feature.icon}
             </Avatar>
           </Box>
@@ -46,7 +46,7 @@ const FeatureSection: React.FC = () => {
           </Typography>
           <Typography 
             variant="body2" 
-            className="text-gray-600 text-[8px] md:text-base "
+            className="text-gray-600 text-[5px] md:text-base "
           >
             {feature.description}
           </Typography>

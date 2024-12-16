@@ -48,7 +48,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
       
-<PromoBanner />
+
         <Header
           cartCount={headerProps.cartCount}
           wishlistCount={headerProps.wishlistCount}

@@ -49,8 +49,8 @@ const FlashSaleSection: React.FC<FlashSaleProps> = ({ endTime, products }) => {
   return (
     <div className="w-full  px-4 py-6">
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row items-center justify-between mb-6 bg-orange-600 p-2">
-        <div className="flex items-center gap-2 mb-2 md:mb-0">
+      <div className="flex  md:flex-row items-center justify-between mb-6 bg-orange-600 p-2">
+        <div className="flex items-center gap-2 ">
           <h2 className="text-xs sm:text-sm md:text-2xl font-bold text-white">
             Vente Flash
           </h2>
@@ -59,6 +59,7 @@ const FlashSaleSection: React.FC<FlashSaleProps> = ({ endTime, products }) => {
             sx={{
               backgroundColor: "#FBC02D", // Pure orange color
               color: "white",
+              
             }}
             size="small"
           />
@@ -113,12 +114,12 @@ const FlashSaleSection: React.FC<FlashSaleProps> = ({ endTime, products }) => {
                 />
               </div>
 
-              <h3 className="font-semibold  text-xs md:text-lg mb-2 md:min-h-16 min-h-6">
+              <h3 className="font-semibold  text-xs md:text-lg mb-2 md:min-h-16 min-h-8">
                 {product.name}
               </h3>
 
               <div className="flex items-center justify-between">
-                <div>
+                <div className="flex flex-col">
                   <span className="text-orange-500 font-bold text-xs  md:text-xl">
                     {product.price}FCFA
                   </span>
