@@ -63,19 +63,18 @@ export const AccountSidebar = ({ activeSection , setActiveSection , link }: Acco
         <nav>
           {menuItems.map((item) => (
             <Link key={item.section} href={item.link}>
-            <button
-              key={item.section}
-              onClick={() => setActiveSection(item.section)}
-              className={`
-                flex items-center w-full p-3 mb-2 rounded-lg transition-colors duration-200
-                ${activeSection === item.section 
-                  ? 'bg-blue-100 text-blue-600' 
-                  : 'hover:bg-gray-100 text-gray-700'}
-              `}
-            >
-              {item.icon}
-              {item.label}
-            </button>
+              <button
+                onClick={() => setActiveSection(item.section)}
+                className={`
+                  flex items-center w-full p-3 mb-2 rounded-lg transition-colors duration-200
+                  ${activeSection === item.section 
+                    ? 'bg-blue-100 text-blue-600' 
+                    : 'hover:bg-gray-100 text-gray-700'}
+                `}
+              >
+                {item.icon}
+                {item.label}
+              </button>
             </Link>
           ))}
   
