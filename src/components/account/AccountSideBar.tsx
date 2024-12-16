@@ -62,7 +62,7 @@ export const AccountSidebar = ({ activeSection , setActiveSection , link }: Acco
   
         <nav>
           {menuItems.map((item) => (
-            <Link href={item.link}>
+            <Link key={item.section} href={item.link}>
             <button
               key={item.section}
               onClick={() => setActiveSection(item.section)}
