@@ -113,17 +113,17 @@ const FlashSaleSection: React.FC<FlashSaleProps> = ({ endTime, products }) => {
                 />
               </div>
 
-              <h3 className="font-semibold  text-xs md:text-lg mb-2 text-center">
+              <h3 className="font-semibold  text-xs md:text-lg mb-2 md:min-h-16 min-h-6">
                 {product.name}
               </h3>
 
               <div className="flex items-center justify-between">
                 <div>
                   <span className="text-orange-500 font-bold text-xs  md:text-xl">
-                    {product.price}XOF
+                    {product.price}FCFA
                   </span>
                   <span className="ml-2 text-gray-400 line-through  text-[9px] md:text-sm">
-                    {product.oldPrice}XOF
+                    {product.oldPrice}FCFA
                   </span>
                 </div>
 

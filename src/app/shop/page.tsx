@@ -715,11 +715,11 @@ const ShopPage: React.FC = () => {
                     />
                   </div>
 
-                  <h3 className="font-semibold text-xs md:text-lg mb-2">
+                  <h3 className="font-semibold md:min-h-16 min-h-6 text-xs md:text-lg   ">
                     {product.name}
                   </h3>
 
-                  <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center justify-between ">
                     <div className="flex flex-col">
                       <span className="text-black  text-xs font-bold md:text-xl">
                         {product.price}CFA
@@ -740,9 +740,19 @@ const ShopPage: React.FC = () => {
                   </Box>
 
                   <div className="flex justify-center mt-4">
-                    <button className="bg-orange-500 text-[10px] md:text-sm font-bold text-white px-2 py-2 rounded-full hover:bg-orange-600 flex items-center">
-                      AJOUTER AU PANIER
-                    </button>
+                    <Button
+                      variant="contained"
+                      startIcon={<ShoppingCart size={16} />}
+                      fullWidth
+                      sx={{
+                        bgcolor: "#F57C00",
+                        mb: 2,
+                        fontSize: { xs: "0.5rem", lg: "0.8rem" }, // Taille du texte
+                        py: { xs: 1, sm: 1.5 }, // Padding vertical
+                      }}
+                    >
+                      Ajouter au panier
+                    </Button>
                   </div>
                 </CardContent>
               </Card>

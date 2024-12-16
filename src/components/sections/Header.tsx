@@ -205,7 +205,7 @@ export const Header: React.FC<NavbarProps> = ({
                   <div className="flex flex-col">
                     <span className="text-sm text-gray-500">Mon panier</span>
                     <span className="font-bold text-gray-700">
-                      {totalPrice.toFixed(2)} CFA
+                      {totalPrice.toFixed(2)} FCFA
                     </span>
                   </div>
                 </Link>
