@@ -469,7 +469,7 @@ const ShopPage: React.FC = () => {
           flex: 1,
           p: 3,
           mt: {
-            xs: 14, // Petit écran
+            xs: 22, // Petit écran
             sm: 3, // Grand écran et au-delà
           },
         }}
@@ -695,16 +695,12 @@ const ShopPage: React.FC = () => {
           {products.map((product) => (
             <Grid item xs={6} sm={4} md={4} lg={3} key={product.id}>
               <Card key={product.id} className="relative group rounded-lg">
-                <Badge
-                  className="absolute top-3 right-5"
-                  badgeContent={`-${product.discount}%`}
-                  sx={{
-                    "& .MuiBadge-badge": {
-                      backgroundColor: "#F57C00", // Pure orange color
-                      color: "white",
-                    },
-                  }}
-                />
+                <div
+                  className="absolute top-3 right-0 bg-orange-500 text-white text-sm font-bold rounded-full px-1 md:px-2 md:py-1 z-50"
+                  style={{ backgroundColor: "#F57C00" }} // Couleur orange pure
+                >
+                  -{product.discount}%
+                </div>
 
                 <CardContent className="p-4 flex flex-col h-full">
                   <div className="aspect-square relative mb-4 overflow-hidden">
@@ -724,10 +720,8 @@ const ShopPage: React.FC = () => {
                       <span className="text-black  text-xs font-bold md:text-xl">
                         {product.price}FCFA
                       </span>
-                      <span className="ml-2 text-gray-400 line-through text-xs md:text-sm">
-                        {product.oldPrice}F
-                        
-                        FCFA
+                      <span className="ml-2 text-gray-400 line-through text-[10px] md:text-sm">
+                        {product.oldPrice}F FCFA
                       </span>
                     </div>
                     <div className="text-gray-500 text-[9px] md:text-sm">
@@ -744,16 +738,16 @@ const ShopPage: React.FC = () => {
                   <div className="flex justify-center mt-4">
                     <Button
                       variant="contained"
-                      startIcon={<ShoppingCart size={10} />}
+                      startIcon={<ShoppingCart size={16} />}
                       fullWidth
                       sx={{
                         bgcolor: "#F57C00",
                         mb: 2,
-                        fontSize: { xs: "0.49rem", lg: "0.8rem" }, // Taille du texte
+                        fontSize: { xs: "0.55rem", lg: "0.8rem" }, // Taille du texte
                         py: { xs: 1, sm: 1.5 }, // Padding vertical
                       }}
                     >
-                      Ajouter au panier
+                      J'achète
                     </Button>
                   </div>
                 </CardContent>

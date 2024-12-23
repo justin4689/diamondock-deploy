@@ -71,16 +71,12 @@ const FeaturedProductSlider: React.FC<FeaturedProductSliderProps> = ({
                 key={product.id}
                 className="relative group rounded-lg h-full"
               >
-                <Badge
-                  className="absolute top-3 right-5"
-                  badgeContent={`-${product.discount}%`}
-                  sx={{
-                    "& .MuiBadge-badge": {
-                      backgroundColor: "#F57C00", // Pure orange color
-                      color: "white",
-                    },
-                  }}
-                />
+                <div
+                  className="absolute top-3 right-0 bg-orange-500 text-white text-sm font-bold rounded-full px-1 md:px-2 md:py-1 z-50"
+                  style={{ backgroundColor: "#F57C00" }} // Couleur orange pure
+                >
+                  -{product.discount}%
+                </div>
 
                 <CardContent className="p-4 flex flex-col h-full justify-between">
                   <div className="aspect-square relative mb-4 overflow-hidden">
@@ -95,7 +91,7 @@ const FeaturedProductSlider: React.FC<FeaturedProductSliderProps> = ({
                     {product.name}
                   </h3>
 
-                  <div className="flex items-center justify-center mb-2">
+                  <div className="flex items-center justify-start mb-2">
                     <div>
                       <span className="text-orange-500 font-bold text-base md:text-xl">
                         {product.price}XOF
@@ -108,7 +104,7 @@ const FeaturedProductSlider: React.FC<FeaturedProductSliderProps> = ({
                   <div className="flex justify-center">
                     <Button
                       variant="contained"
-                      startIcon={<ShoppingCart size={16} />}
+                      startIcon={<ShoppingCart size={16}  />}
                       fullWidth
                       sx={{
                         bgcolor: "#F57C00",
@@ -117,7 +113,7 @@ const FeaturedProductSlider: React.FC<FeaturedProductSliderProps> = ({
                         py: { xs: 1, sm: 1.5 }, // Padding vertical
                       }}
                     >
-                      Ajouter au panier
+                      J'achète
                     </Button>
                   </div>
                 </CardContent>

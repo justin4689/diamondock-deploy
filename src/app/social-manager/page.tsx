@@ -19,7 +19,7 @@ function page() {
               </h2>
 
               <p className="mt-2 text-gray-700">
-                Contrat Annuel= 100000 FCFA frais unique
+                Contrat Annuel = 100000 FCFA frais unique
               </p>
 
               <p className="mt-2 sm:mt-4">
@@ -120,7 +120,7 @@ function page() {
               </h2>
 
               <p className="mt-2 text-gray-700">
-                Contrat Annuel= 125000 FCFA frais unique
+                Contrat Annuel = 125000 FCFA frais unique
               </p>
 
               <p className="mt-2 sm:mt-4">
@@ -204,7 +204,7 @@ function page() {
                     <span className="text-gray-700"> PROMOTION: </span>
                   </div>
                   <p className="text-gray-700 text-sm pl-6">
-                    Profiter d'une réduction incroyable de 100 000 F CFA / mois.
+                    Profiter d'une réduction incroyable de 100 000 FCFA / mois.
                     Après la promotion la tarification sera de 175 000 F CFA /
                     MOIS.
                   </p>
@@ -323,7 +323,7 @@ function page() {
                     <span className="text-gray-700"> PROMOTION: </span>
                   </div>
                   <p className="text-gray-700 text-sm pl-6">
-                    Profiter d'une réduction incroyable de 100 000 F CFA / mois.
+                    Profiter d'une réduction incroyable de 100 000 FCFA / mois.
                     Après la promotion la tarification sera de 250 000 FCFA /
                     MOIS.
                   </p>

@@ -145,7 +145,7 @@ export const Header: React.FC<NavbarProps> = ({
       items: [],
     },
     {
-      title: "Multi-vendeur",
+      title: "Devenir Vendeur",
       icon: Store,
       items: [],
     },
