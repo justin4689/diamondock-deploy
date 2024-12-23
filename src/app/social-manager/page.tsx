@@ -8,7 +8,7 @@ function page() {
 
   return (
     <div>
-      <div className="max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+      <div className="max-w-screen-xl mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
         <h1 className="text-center text-2xl font-bold mb-2">TARIFICATION</h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-stretch md:grid-cols-3 md:gap-8">
           <div className="divide-y divide-gray-200 rounded-2xl border border-gray-200 shadow-sm">
