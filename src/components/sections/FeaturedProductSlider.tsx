@@ -92,12 +92,12 @@ const FeaturedProductSlider: React.FC<FeaturedProductSliderProps> = ({
                   </h3>
 
                   <div className="flex items-center justify-start mb-2">
-                    <div>
+                    <div className="flex flex-col items-center">
                       <span className="text-orange-500 font-bold text-base md:text-xl">
-                        {product.price}XOF
+                        {product.price}FCFA
                       </span>
                       <span className="ml-2 text-gray-400 line-through text-xs md:text-sm">
-                        {product.oldPrice}XOF
+                        {product.oldPrice}FCFA
                       </span>
                     </div>
                   </div>

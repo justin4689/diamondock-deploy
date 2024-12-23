@@ -4,17 +4,17 @@ import { IoIosLock } from "react-icons/io";
 
 const features = [
   {
-    icon: <FaShippingFast className="text-lg md:text-2xl lg:text-3xl text-white" />,
+    icon: <FaShippingFast size={30} className="text-lg md:text-2xl lg:text-3xl text-white" />,
     title: 'LIVRAISON RAPIDE ET EFFICACE',
     description: 'Dans le monde entier ',
   },
   {
-    icon: <FaHeadset className="text-lg md:text-2xl lg:text-3xl text-white" />,
+    icon: <FaHeadset  size={30} className="text-lg md:text-2xl lg:text-3xl text-white" />,
     title: 'SERVICE CLIENT 24/7',
     description: 'Nous sommes disponibles 24/7',
   },
   {
-    icon: <IoIosLock className="text-lg md:text-2xl lg:text-3xl text-white" />,
+    icon: <IoIosLock size={30} className="text-lg md:text-2xl lg:text-3xl text-white" />,
     title: 'PAYEMENTS SECURISES',
     description: 'Payements sécurisés et rapides',
   },

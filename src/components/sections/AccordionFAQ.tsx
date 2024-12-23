@@ -387,7 +387,7 @@ const AccordionFAQ = () => {
                 </dt>
                 {activeIndex === index && (
                   <dd className="mt-2 pr-12" id={`faq-${index}`}>
-                    <div className="text-base leading-7 text-gray-600">
+                    <div className=" text-xs md:text-base leading-7 text-gray-600">
                       {faq.answer}
                     </div>
                   </dd>
