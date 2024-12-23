@@ -58,7 +58,7 @@ const Navbar = () => {
   
     { title: "Boutique", icon: ShoppingCart ,link:"/shop"},
     { title: "Digital Mall", icon: Store ,link:"/digital-mall"},
-    { title: "Social Media Manager", icon: Users ,link:"/social-media-manager"},
+    { title: "Social Media Manager", icon: Users ,link:"/social-manager"},
     { title: "Music Store", icon: Music ,link:"/music-store"},
    
   
