@@ -52,7 +52,7 @@ const HeroSection: React.FC = () => {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index} className="relative">
-            <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 text-white pt-1">
+            <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 text-white pt-20">
               <div className="text-center max-w-2xl mx-auto">
                 <h1 className="lg:text-4xl text-2xl font-bold mb-4 animate-fadeIn">
                   {slide.title}

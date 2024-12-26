@@ -87,42 +87,79 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({
 
       <Divider sx={{ mb: 3 }} />
 
-      {/* Liste des avis */}
-      {reviews.map((review) => (
-        <Paper 
-          key={review.id} 
-          elevation={0} 
-          sx={{ 
-            p: 2, 
-            mb: 2, 
-            border: '1px solid', 
-            borderColor: 'divider' 
-          }}
+     {/* Liste des avis */}
+{reviews.map((review) => (
+  <Paper 
+    key={review.id} 
+    elevation={0} 
+    sx={{ 
+      p: 2, 
+      mb: 2, 
+      border: '1px solid', 
+      borderColor: 'divider',
+      display: 'flex',
+      flexDirection: { xs: 'column', sm: 'row' }, // Adjust layout for small screens
+      alignItems: { sm: 'center' }
+    }}
+  >
+    <Box 
+      sx={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        mb: { xs: 2 , sm: 0  }, // Margin-bottom only for small screens
+        mr: { sm: 2 } // Margin-right for non-small screens
+      }}
+    >
+      <Avatar 
+        src={review.authorAvatar} 
+        alt={review.author} 
+        sx={{ 
+          mr: {  xs: 2 }, // Remove margin-right for small screens
+          mb: { xs: 1, sm: 0 } // Add margin-bottom for small screens
+        }}
+      />
+      <Box >
+        <Typography 
+          variant="subtitle1" 
+          sx={{ display: { xs: 'block', md: 'block' } }}
         >
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-            <Avatar 
-              src={review.authorAvatar} 
-              alt={review.author} 
-              sx={{ mr: 2 }}
-            />
-            <Box>
-              <Typography variant="subtitle1">{review.author}</Typography>
-              <Typography variant="body2" color="text.secondary">
-                {review.date}
-              </Typography>
-            </Box>
-            <Rating 
-              value={review.rating} 
-              readOnly 
-              sx={{ ml: 'auto' }}
-            />
-          </Box>
-          
-          <Typography variant="body1">
-            {review.comment}
-          </Typography>
-        </Paper>
-      ))}
+          {review.author}
+        </Typography>
+        <Typography 
+          variant="body2" 
+          color="text.secondary"
+          sx={{ fontSize: { xs: '0.8rem', sm: 'inherit' } }} // Smaller font for small screens
+        >
+          {review.date}
+        </Typography>
+      </Box>
+    </Box>
+    <Box 
+      sx={{
+        flex: 1, 
+        display: 'flex', 
+        flexDirection: 'column',
+        justifyContent: 'space-between'
+      }}
+    >
+      <Typography 
+        variant="body1" 
+        sx={{ mb: { xs: 1, sm: 0 }, fontSize: { xs: '0.9rem', sm: 'inherit' } }}
+      >
+        {review.comment}
+      </Typography>
+      <Rating 
+        value={review.rating} 
+        readOnly 
+        sx={{ 
+          mt: { xs: 1, sm: 0 }, 
+          alignSelf: { xs: 'flex-start', sm: 'flex-end' } // Adjust alignment
+        }}
+      />
+    </Box>
+  </Paper>
+))}
+
     </Box>
   );
 };

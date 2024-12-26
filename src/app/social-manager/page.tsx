@@ -1,12 +1,22 @@
 "use client";
 import React, { useState } from "react";
 import AccordionFAQ from "@/components/sections/AccordionFAQ";
+import { Box } from "@mui/material";
 
 function page() {
 
 
 
   return (
+    <Box
+        sx={{
+          
+          mt: {
+            xs: 22, // Petit écran
+            sm: 3, // Grand écran et au-delà
+          },
+        }}
+      >
     <div className="bg-white">
       <div className="max-w-screen-xl mx-auto px-4 py-6 lg:px-8 lg:py-16">
         <h1 className="text-center text-2xl font-bold mb-2">TARIFICATION</h1>
@@ -335,6 +345,7 @@ function page() {
       </div>
       <AccordionFAQ />
     </div>
+    </Box>
   );
 }
 

@@ -152,7 +152,7 @@ export const Header: React.FC<NavbarProps> = ({
   ];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[60] bg-white shadow-sm">
+    <div className="fixed top-0 left-0 right-0 z-[60] bg-white shadow-sm"  style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
       <PromoBanner />
 
       <nav className="bg-white">

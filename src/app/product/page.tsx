@@ -115,6 +115,18 @@ const ProductDetailsPage: React.FC = () => {
 
 
   return (
+
+    
+    <Box
+    sx={{
+      
+      mt: {
+        xs: 22, // Petit écran
+        sm: 3, // Grand écran et au-delà
+      },
+    }}
+  >
+
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Grid container spacing={4}>
         {/* Galerie d'images */}
@@ -251,6 +263,7 @@ const ProductDetailsPage: React.FC = () => {
         */}
       </Grid>
     </Container>
+    </Box>
   );
 };
 

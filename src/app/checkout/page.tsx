@@ -93,7 +93,8 @@ const CheckoutPage: React.FC = () => {
   };
 
   return (
-    <Box sx={{ p: 4, maxWidth: 1200, mx: "auto" }}>
+    <Box sx={{ p: 4, maxWidth: 1200, mx: "auto",mt:{xs:22,sm:3} }}>
+     
       {/* Stepper */}
       <Stepper activeStep={activeStep} sx={{ mb: 4 }}>
         {steps.map((label) => (
