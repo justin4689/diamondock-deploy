@@ -63,7 +63,7 @@ interface ShopDetails {
   };
 }
 
-const ShopPage = ({ params }: { params: { id: string } }) => {
+const ShopPage = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [sortBy, setSortBy] = useState("newest");
 
