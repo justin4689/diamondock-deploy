@@ -1,17 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import AccordionFAQ from "@/components/sections/AccordionFAQ";
 import { Box } from "@mui/material";
-
-
 
 export default function SocialManager() {
   return (
     <Box
       sx={{
         mt: {
-          xs: 22, // Petit écran
-          sm: 3, // Grand écran et au-delà
+          xs: 22,
+          sm: 3,
         },
       }}
     >
