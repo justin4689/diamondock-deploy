@@ -69,7 +69,7 @@ const CheckoutPage: React.FC = () => {
     total: 0,
     updateTotal() {
       this.total = this.subtotal + this.shipping - this.discount;
-    }
+    },
   };
 
   // Étapes du checkout
@@ -93,10 +93,25 @@ const CheckoutPage: React.FC = () => {
   };
 
   return (
-    <Box sx={{ p: 4, maxWidth: 1200, mx: "auto",mt:{xs:22,sm:3} }}>
-     
+    <Box
+      sx={{
+        p: { xs: 2, sm: 4 },
+        maxWidth: 1200,
+        mx: "auto",
+        mt: { xs: 22, sm: 3 },
+      }}
+    >
       {/* Stepper */}
-      <Stepper activeStep={activeStep} sx={{ mb: 4 }}>
+      <Stepper
+        activeStep={activeStep}
+        sx={{
+          mb: 4,
+          "& .MuiStepLabel-label": {
+            fontSize: { xs: "0.8rem", sm: "1rem" },
+          },
+        }}
+        alternativeLabel
+      >
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
@@ -104,7 +119,7 @@ const CheckoutPage: React.FC = () => {
         ))}
       </Stepper>
 
-      <Grid container spacing={4}>
+      <Grid container spacing={{ xs: 2, sm: 4 }}>
         <Grid item xs={12} md={8}>
           {activeStep === 0 && (
             <Paper sx={{ p: 3, mb: 3 }}>
@@ -117,14 +132,22 @@ const CheckoutPage: React.FC = () => {
                 {cartItems.map((item) => (
                   <Box
                     key={item.id}
-                    sx={{ display: "flex", mb: 2, alignItems: "center" }}
+                    sx={{
+                      display: "flex",
+                      mb: 2,
+                      alignItems: "center",
+                      flexDirection: { xs: "column", sm: "row" },
+                      textAlign: { xs: "center", sm: "left" },
+                      gap: { xs: 2, sm: 0 },
+                    }}
                   >
                     <img
                       src={item.image}
                       alt={item.name}
                       style={{
-                        width: 80,
-                        height: 80,
+                        width: "100%",
+                        maxWidth: "200px",
+                        height: "auto",
                         objectFit: "cover",
                         borderRadius: 8,
                       }}
@@ -168,7 +191,7 @@ const CheckoutPage: React.FC = () => {
                     required
                   />
                 </Grid>
-               
+
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
@@ -184,7 +207,7 @@ const CheckoutPage: React.FC = () => {
                   sx={{ display: "flex", alignItems: "center", gap: 2 }}
                 >
                   <Box>
-                  <Typography>Préfixe</Typography>
+                    <Typography>Préfixe</Typography>
                     <Typography>+225</Typography>
                   </Box>
 
@@ -205,7 +228,7 @@ const CheckoutPage: React.FC = () => {
                     placeholder="Numéro et nom de rue"
                   />
                 </Grid>
-                
+
                 <Grid item xs={12} sm={6}>
                   <TextField
                     fullWidth
@@ -222,7 +245,7 @@ const CheckoutPage: React.FC = () => {
                     required
                   />
                 </Grid>
-               
+
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={
@@ -319,13 +342,20 @@ const CheckoutPage: React.FC = () => {
             </Typography>
 
             {/* Section coupon */}
-            <Box sx={{ my: 2 }}>
+            <Box
+              sx={{
+                my: 2,
+                display: "flex",
+                flexDirection: { xs: "column", sm: "row" },
+                gap: 2,
+              }}
+            >
               <TextField
+                fullWidth
                 size="small"
                 label="Code promo"
                 value={couponCode}
                 onChange={(e) => setCouponCode(e.target.value)}
-                sx={{ mr: 1, color: "#F57C00" }}
               />
               <Button
                 variant="outlined"
@@ -333,7 +363,8 @@ const CheckoutPage: React.FC = () => {
                 sx={{
                   color: "#F57C00",
                   borderColor: "#F57C00",
-                  mt: { xs: 0, md: 1 },
+                  width: { xs: "100%", sm: "auto" },
+                  px: 3,
                 }}
               >
                 Appliquer

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { Box } from '@mui/material'; 
 
 const CartPage: React.FC = () => {
   // Tableau simulant les articles dans le panier
@@ -64,6 +65,15 @@ const CartPage: React.FC = () => {
   }
 
   return (
+    <Box
+    sx={{
+     
+      mt: {
+        xs: 22, // Petit écran
+        sm: 3, // Grand écran et au-delà
+      },
+    }}
+  >
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Panier</h1>
       <div className="grid gap-4">
@@ -124,6 +134,7 @@ const CartPage: React.FC = () => {
         </Link>
       </div>
     </div>
+    </Box>
   );
 };
 

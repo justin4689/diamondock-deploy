@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Inter } from 'next/font/google'
+
 import "./globals.css";
 import PromoBanner from "@/components/sections/PromoBanner";
 import Header from "@/components/sections/Header";
 import NavBar from "@/components/sections/NavBar";
+import BackToTop from "@/components/BackToTop";
 import React from "react";
 
 import Footer from "@/components/sections/Footer";
-
-
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,7 +34,6 @@ const headerProps = {
   totalPrice: 0.0,
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -47,8 +47,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      
-
         <Header
           cartCount={headerProps.cartCount}
           wishlistCount={headerProps.wishlistCount}
@@ -56,10 +54,9 @@ export default function RootLayout({
           totalPrice={headerProps.totalPrice}
         />
         <NavBar />
-       
-       
 
         {children}
+        <BackToTop />
         <Footer />
       </body>
     </html>

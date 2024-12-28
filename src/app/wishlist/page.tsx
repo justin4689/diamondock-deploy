@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useState } from "react";
 import {
   Box,
@@ -40,8 +41,6 @@ const WishlistPage: React.FC = () => {
       discount: 15,
       notifications: false,
     },
-    
-    
   ]);
 
   // Fonction pour supprimer un produit
@@ -50,7 +49,16 @@ const WishlistPage: React.FC = () => {
   };
 
   return (
-    <Box sx={{ p: 4 }}>
+    <Box
+      sx={{
+        pb: 4,
+        px: 2,
+        mt: {
+          xs: 22, // Petit écran
+          sm: 3, // Grand écran et au-delà
+        },
+      }}
+    >
       {/* En-tête avec sélection de liste */}
       <Box
         sx={{
@@ -60,26 +68,34 @@ const WishlistPage: React.FC = () => {
           mb: 4,
         }}
       >
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-          <Typography variant="h4">Mes Listes de Souhaits</Typography>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          <h1
+          className="text-2xl md:text-4xl font-meduim"
+         
+          >
+            Mes Listes de Souhaits
+          </h1>
+          <Link href="/shop"> 
           <IconButton color="primary">
             <Plus />
           </IconButton>
+          </Link>
         </Box>
       </Box>
 
       {/* Grille de produits */}
       <Grid container spacing={3}>
         {lists.map((item) => (
-          <Grid item xs={6} sm={6} md={4} lg={3} key={item.id}>
-            <Card className="relative group rounded-lg">
-              <CardContent className="p-4 flex flex-col h-full">
-                <Box sx={{ position: "absolute", top: 8, right: 8 }}>
-                  <IconButton>
-                    <MoreVertical />
-                  </IconButton>
-                </Box>
+          <Grid item xs={6} sm={4} md={4} lg={3} key={item.id}>
+            <Card key={item.id} className="relative group rounded-lg">
+              <div
+                className="absolute top-3 right-0 bg-orange-500 text-white text-sm font-bold rounded-full px-1 md:px-2 md:py-1 z-50"
+                style={{ backgroundColor: "#F57C00" }} // Couleur orange pure
+              >
+                -{item.discount}%
+              </div>
 
+              <CardContent className="p-4 flex flex-col h-full">
                 <div className="aspect-square relative mb-4 overflow-hidden">
                   <img
                     src={item.image}
@@ -88,77 +104,60 @@ const WishlistPage: React.FC = () => {
                   />
                 </div>
 
-                <Typography variant="h6" className=" md:min-h-16 min-h-6 text-xs md:text-lg ">
+                <h3 className="font-semibold md:min-h-16 min-h-8 text-xs md:text-lg   ">
                   {item.name}
-                </Typography>
+                </h3>
 
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    mb: 2,
-                  }}
-                >
-                  <Box>
-                    <Typography
-                      variant="h6"
-                      color="primary"
-                      sx={{
-                        xs: { fontSize: "10px", height: "100px" },
-                        md: { fontSize: "16px", height: "16px" },
-                      }}
-                    >
-                      {item.price} FCFA
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      sx={{
-                        textDecoration: "line-through",
-                        xs: { fontSize: "8px" },
-                        md: { fontSize: "12px" },
-                      }}
-                    >
-                      {item.oldPrice} FCFA
-                    </Typography>
-                  </Box>
+                <div className="flex items-center justify-between ">
+                  <div className="flex flex-col">
+                    <span className="text-black  text-xs font-bold md:text-xl">
+                      {item.price}FCFA
+                    </span>
+                    <span className="ml-2 text-gray-400 line-through text-[10px] md:text-sm">
+                      {item.oldPrice}F FCFA
+                    </span>
+                  </div>
+                  <div className="text-gray-500 text-[9px] md:text-sm">
+                    {item.brand}
+                  </div>
+                </div>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Rating value={item.rating} readOnly size="small" />
+                  <Typography variant="body2" sx={{ ml: 1 }}>
+                    ({item.rating})
+                  </Typography>
                 </Box>
 
-                <Rating
-                  value={item.rating}
-                  readOnly
-                  size="small"
-                  sx={{ mb: 2 }}
-                />
+                <div className=" mt-4">
+                  <Button
+                    variant="contained"
+                    startIcon={<ShoppingCart size={16} />}
+                    fullWidth
+                    sx={{
+                      bgcolor: "#F57C00",
+                      mb: 2,
+                      fontSize: { xs: "0.55rem", lg: "0.8rem" }, // Taille du texte
+                      py: { xs: 1, sm: 1.5 }, // Padding vertical
+                    }}
+                  >
+                    J'achète
+                  </Button>
 
-                <Button
-                  variant="contained"
-                  startIcon={<ShoppingCart size={16} />}
-                  fullWidth
-                  sx={{
-                    bgcolor: "#F57C00",
-                    mb: 2,
-                    fontSize: { xs: "0.5rem", sm: "0.875rem" }, // Taille du texte
-                    py: { xs: 1, sm: 1.5}, // Padding vertical
-                  }}
-                >
-                  Ajouter au panier
-                </Button>
-                {/* Bouton pour supprimer le produit */}
-                <Button
-                  variant="outlined"
-                  startIcon={<Trash size={16}/>}
-                  fullWidth
-                  color="error"
-                  onClick={() => handleRemoveItem(item.id)}
-                  sx={{
-                    fontSize: { xs: "0.5rem", sm: "0.875rem"}, // Taille du texte
-                    py: { xs: 1, sm: 1.5}, // Padding vertical
-                  }}
-                >
-                  Supprimer
-                </Button>
+                  {/* Bouton pour supprimer le produit */}
+                  <Button
+                    variant="outlined"
+                    startIcon={<Trash size={16} />}
+                    fullWidth
+                    color="error"
+                    onClick={() => handleRemoveItem(item.id)}
+                    sx={{
+                      fontSize: { xs: "0.5rem", sm: "0.875rem" }, // Taille du texte
+                      py: { xs: 1, sm: 1.5 }, // Padding vertical
+                    }}
+                  >
+                    Supprimer
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </Grid>

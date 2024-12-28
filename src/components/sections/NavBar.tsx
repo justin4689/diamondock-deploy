@@ -63,7 +63,7 @@ const Navbar = () => {
    
   
     { title: "Diamonds Ares", icon: Diamond ,link:"/diamonds-ares"},
-    { title: "Multi-vendeur", icon: Store ,link:"/multi-vendeur"},
+    { title: "Devenir Vendeur", icon: Store ,link:"/multi-vendeur"},
   
   
   ];

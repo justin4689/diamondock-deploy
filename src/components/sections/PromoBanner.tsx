@@ -13,7 +13,7 @@ import { X } from 'lucide-react';
 
   return (
     (
-      <div className="   bg-red-400 p-2 sm:p-4 md:p-5 lg:p-1 rounded-none w-full flex items-center justify-center relative">
+      <div className="   bg-red-700 p-2 sm:p-4 md:p-5 lg:p-1 rounded-none w-full flex items-center justify-center relative">
         {/* Button to close the promo banner */}
       
 
