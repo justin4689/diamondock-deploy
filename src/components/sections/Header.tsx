@@ -120,7 +120,7 @@ export const Header: React.FC<NavbarProps> = ({
 
   const menuItems: MenuItem[] = [
     {
-      title: "Shop",
+      title: "Boutique",
       icon: ShoppingBag,
       items: [],
     },
