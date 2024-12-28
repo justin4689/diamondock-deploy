@@ -65,18 +65,28 @@ export default function AccountLayout({
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
                     <ListItem
-                      button
-                      selected={pathname === item.path}
                       sx={{
-                        "&.Mui-selected": {
-                          backgroundColor: "#F57C00",
-                          color: "white",
-                          "&:hover": {
-                            backgroundColor: "#EF6C00",
-                          },
-                          "& .MuiListItemIcon-root": {
-                            color: "white",
-                          },
+                        backgroundColor:
+                          pathname === item.path
+                            ? "rgba(245, 124, 0, 0.8)"
+                            : "transparent",
+                        color: pathname === item.path ? "white" : "inherit",
+                        "&:hover": {
+                          backgroundColor:
+                            pathname === item.path
+                              ? "rgba(245, 124, 0, 0.9)"
+                              : "rgba(245, 124, 0, 0.08)",
+                        },
+                        "&:focus-visible": {
+                          backgroundColor:
+                            pathname === item.path
+                              ? "rgba(245, 124, 0, 0.9)"
+                              : "rgba(245, 124, 0, 0.15)",
+                          outline: "2px solid rgba(245, 124, 0, 0.6)",
+                          outlineOffset: "-2px",
+                        },
+                        "& .MuiListItemIcon-root": {
+                          color: pathname === item.path ? "white" : "inherit",
                         },
                       }}
                     >
@@ -88,7 +98,23 @@ export default function AccountLayout({
                   </Link>
                 ))}
                 <Divider sx={{ my: 1 }} />
-                <ListItem button sx={{ color: "red" }}>
+                <ListItem
+                  component="button"
+                  onClick={() => {
+                    /* handle logout */
+                  }}
+                  sx={{
+                    color: "red",
+                    border: "none",
+                    background: "none",
+                    width: "100%",
+                    textAlign: "left",
+                    cursor: "pointer",
+                    "&:hover": {
+                      backgroundColor: "rgba(255, 0, 0, 0.04)",
+                    },
+                  }}
+                >
                   <ListItemIcon sx={{ minWidth: 40, color: "red" }}>
                     <LogOut />
                   </ListItemIcon>
