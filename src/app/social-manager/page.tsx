@@ -3,13 +3,9 @@ import React, { useState } from "react";
 import AccordionFAQ from "@/components/sections/AccordionFAQ";
 import { Box } from "@mui/material";
 
-type Props = {
-  params: {
-    id: string;
-  };
-};
 
-export default function Page({ params }: Props) {
+
+export default function SocialManager() {
   return (
     <Box
       sx={{
