@@ -140,14 +140,12 @@ const DigitalMallPage = () => {
                   </Box>
 
                   <Box
-                    sx={{ display: "flex", justifyContent: "space-between" }}
+                    sx={{ display: "flex", justifyContent: "space-end" }}
                   >
                     <Typography variant="body2">
                       {shop.productsCount} produits
                     </Typography>
-                    <Typography variant="body2">
-                      {shop.followers} abonnés
-                    </Typography>
+                   
                   </Box>
 
                   <Button

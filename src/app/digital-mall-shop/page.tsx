@@ -29,6 +29,7 @@ import {
   Filter,
   ShoppingCart,
 } from "lucide-react";
+import Image from "next/image";
 
 // Types
 interface ShopProduct {
@@ -186,7 +187,9 @@ const ShopPage = () => {
                     <Grid item xs={12} sm={6} md={4} key={product.id}>
                       <Card>
                         <Box sx={{ position: "relative", paddingTop: "100%" }}>
-                          <img
+                          <Image
+                            width={100}
+                            height={100}
                             src={product.image}
                             alt={product.name}
                             style={{
@@ -283,10 +286,7 @@ const ShopPage = () => {
                 <Typography>Produits</Typography>
                 <Typography>{shopDetails.productsCount}</Typography>
               </Box>
-              <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
-                <Typography>Abonnés</Typography>
-                <Typography>{shopDetails.followers}</Typography>
-              </Box>
+              
               <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
                 <Typography>Note moyenne</Typography>
                 <Box sx={{ display: "flex", alignItems: "center" }}>

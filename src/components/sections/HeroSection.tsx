@@ -38,7 +38,7 @@ const HeroSection: React.FC = () => {
   ]
 
   return (
-    <section className="relative w-full  h-[400px] z-10">
+    <section className="relative w-full  h-[400px] md:h-[280px] z-10">
       <Swiper
         modules={[Autoplay, Pagination]}
         spaceBetween={50}
@@ -62,7 +62,7 @@ const HeroSection: React.FC = () => {
                 </p>
                 <a 
                   href={slide.link} 
-                  className="md:px-6 md:py-3 px-4 py-2 bg-orange-500 text-white rounded-full hover:bg-primary-dark transition-all animate-bounce"
+                  className="md:px-6 md:py-3 px-4 py-2 bg-orange-600 text-white rounded-full hover:bg-orange-700 transition-all animate-bounce"
                 >
                   {slide.buttonText}
                 </a>

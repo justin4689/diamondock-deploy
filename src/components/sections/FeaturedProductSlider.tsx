@@ -3,9 +3,10 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import { ShoppingCart } from "lucide-react";
-import { Card, CardContent, Badge, Button } from "@mui/material";
+import { Card, CardContent, Button } from "@mui/material";
 import { SlArrowRight } from "react-icons/sl";
-// Import Swiper styles
+import Image from "next/image";
+// Import Swiper styles 
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -80,7 +81,10 @@ const FeaturedProductSlider: React.FC<FeaturedProductSliderProps> = ({
 
                 <CardContent className="p-4 flex flex-col h-full justify-between">
                   <div className="aspect-square relative mb-4 overflow-hidden">
-                    <img
+                    <Image
+                      
+                      width={200}
+                      height={200}
                       src={product.image}
                       alt={product.name}
                       className="object-cover w-full h-full transition-transform duration-300 transform group-hover:scale-110 rounded-lg"
@@ -107,13 +111,13 @@ const FeaturedProductSlider: React.FC<FeaturedProductSliderProps> = ({
                       startIcon={<ShoppingCart size={16}  />}
                       fullWidth
                       sx={{
-                        bgcolor: "#F57C00",
+                        bgcolor: "#EF6C00",
                         mb: 2,
                         fontSize: { xs: "0.49rem", sm: "0.875rem" }, // Taille du texte
                         py: { xs: 1, sm: 1.5 }, // Padding vertical
                       }}
                     >
-                      J'achète
+                      J&apos;achète
                     </Button>
                   </div>
                 </CardContent>

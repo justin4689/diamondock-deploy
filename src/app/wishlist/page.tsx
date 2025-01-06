@@ -137,7 +137,7 @@ const WishlistPage: React.FC = () => {
                     startIcon={<ShoppingCart size={16} />}
                     fullWidth
                     sx={{
-                      bgcolor: "#F57C00",
+                      bgcolor: "#EF6C00",
                       mb: 2,
                       fontSize: { xs: "0.55rem", lg: "0.8rem" }, // Taille du texte
                       py: { xs: 1, sm: 1.5 }, // Padding vertical

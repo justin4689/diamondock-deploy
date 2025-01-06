@@ -18,7 +18,8 @@ import {
   Checkbox,
   Alert,
 } from "@mui/material";
-import { ShoppingCart, Truck, CreditCard, Check } from "lucide-react";
+
+import Image from "next/image";
 
 const CheckoutPage: React.FC = () => {
   // États
@@ -141,7 +142,9 @@ const CheckoutPage: React.FC = () => {
                       gap: { xs: 2, sm: 0 },
                     }}
                   >
-                    <img
+                    <Image
+                      width={200}
+                      height={200}
                       src={item.image}
                       alt={item.name}
                       style={{
@@ -170,7 +173,7 @@ const CheckoutPage: React.FC = () => {
               <Button
                 variant="contained"
                 onClick={() => setActiveStep(1)}
-                sx={{ mt: 2, bgcolor: "#F57C00" }}
+                sx={{ mt: 2, bgcolor: "#EF6C00" }}
               >
                 Continuer
               </Button>
@@ -261,7 +264,7 @@ const CheckoutPage: React.FC = () => {
               <Button
                 variant="contained"
                 onClick={() => setActiveStep(2)}
-                sx={{ mt: 2, bgcolor: "#F57C00" }}
+                sx={{ mt: 2, bgcolor: "#EF6C00" }}
               >
                 Continuer vers le paiement
               </Button>
@@ -361,8 +364,8 @@ const CheckoutPage: React.FC = () => {
                 variant="outlined"
                 onClick={handleApplyCoupon}
                 sx={{
-                  color: "#F57C00",
-                  borderColor: "#F57C00",
+                  color: "#EF6C00",
+                  borderColor: "#EF6C00",
                   width: { xs: "100%", sm: "auto" },
                   px: 3,
                 }}

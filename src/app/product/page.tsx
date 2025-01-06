@@ -7,8 +7,7 @@ import {
   Box,
   Typography,
   Paper,
-  Divider
-
+  Divider,
 } from "@mui/material";
 
 import ProductImageGallery from "@/components/sections/ProductDetails/ProductImageGallery";
@@ -110,142 +109,161 @@ const ProductDetailsPage: React.FC = () => {
     returns: "Retours gratuits sous 30 jours.",
   };
 
-
   return (
-
-    
     <Box
-    sx={{
-      
-      mt: {
-        xs: 22, // Petit écran
-        sm: 3, // Grand écran et au-delà
-      },
-    }}
-  >
-
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <Grid container spacing={4}>
-        {/* Galerie d'images */}
-        <Grid item xs={12} md={4}>
-          <ProductImageGallery
-            images={productData.images}
-            alt={productData.name}
-            sx={{ borderRadius: 2, overflow: "hidden" }}
-          />
-        </Grid>
-
-        {/* Informations du produit */}
-        <Grid item xs={12} md={5}>
-          <Paper elevation={1} sx={{ p: 3, backgroundColor: "#f9f9f9" }}>
-            <ProductInfo
-              name={productData.name}
-              price={productData.price}
-              description={productData.description}
-              rating={productData.rating}
-              reviewCount={productData.reviewCount}
-              inStock={productData.inStock}
-              sizes={productData.sizes}
-              colors={productData.colors}
+      sx={{
+        mt: {
+          xs: 22, // Petit écran
+          sm: 3, // Grand écran et au-delà
+        },
+      }}
+    >
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        <Grid container spacing={4}>
+          {/* Galerie d'images */}
+          <Grid item xs={12} md={4}>
+            <ProductImageGallery
+              images={productData.images}
+              alt={productData.name}
+              sx={{ borderRadius: 2, overflow: "hidden" }}
             />
-          </Paper>
-        </Grid>
+          </Grid>
 
-        {/* Section livraison - Maintenant visible sur mobile */}
-        <Grid item xs={12} md={3}>
-          <Paper 
-            elevation={1} 
-            sx={{ 
-              p: 2, 
-              backgroundColor: "#f9f9f9",
-              position: { xs: 'fixed', md: 'static' },
-              bottom: { xs: 0, md: 'auto' },
-              left: { xs: 0, md: 'auto' },
-              right: { xs: 0, md: 'auto' },
-              zIndex: { xs: 1000, md: 1 },
-              width: { xs: '100%', md: 'auto' },
-              borderRadius: { xs: '20px 20px 0 0', md: '4px' },
-              boxShadow: { 
-                xs: '0px -4px 10px rgba(0, 0, 0, 0.1)', 
-                md: '0px 2px 4px rgba(0, 0, 0, 0.1)' 
-              }
-            }}
-          >
-            <Typography variant="h6" gutterBottom sx={{ display: { xs: 'none', md: 'block' } }}>
-              LIVRAISON & RETOURS
-            </Typography>
-            <Divider sx={{ display: { xs: 'none', md: 'block' }, mb: 2 }} />
-            
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              <div>
-                <label className="block text-sm font-medium text-gray-900">
-                  Région de livraison
-                </label>
-                <select
-                  className="mt-2 w-full outline-none rounded-lg border border-gray-300 bg-white p-2 text-gray-700 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 sm:text-sm"
+          {/* Informations du produit */}
+          <Grid item xs={12} md={5}>
+            <Paper elevation={1} sx={{ p: 3, backgroundColor: "#f9f9f9" }}>
+              <ProductInfo
+                name={productData.name}
+                price={productData.price}
+                description={productData.description}
+                rating={productData.rating}
+                reviewCount={productData.reviewCount}
+                inStock={productData.inStock}
+                sizes={productData.sizes}
+                colors={productData.colors}
+              />
+            </Paper>
+          </Grid>
+
+          {/* Section livraison - Maintenant visible sur mobile */}
+          <Grid item xs={12} md={3}>
+            <Paper
+              elevation={1}
+              sx={{
+                p: 2,
+                backgroundColor: "#f9f9f9",
+               
+                zIndex: { xs: 1000, md: 1 },
+                width: { xs: "100%", md: "auto" },
+                borderRadius: { xs: "20px 20px 0 0", md: "4px" },
+                boxShadow: {
+                  xs: "0px -4px 10px rgba(0, 0, 0, 0.1)",
+                  md: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+                },
+              }}
+            >
+              <Typography
+                variant="h6"
+                gutterBottom
+                sx={{ display: { xs: "none", md: "block" } }}
+              >
+                LIVRAISON & RETOURS
+              </Typography>
+              <Divider sx={{ display: { xs: "none", md: "block" }, mb: 2 }} />
+
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <div>
+                  <label className="block text-sm font-medium text-gray-900">
+                    Région de livraison
+                  </label>
+                  <select className="mt-2 w-full outline-none rounded-lg border border-gray-300 bg-white p-2 text-gray-700 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 sm:text-sm">
+                    <option value="">Sélectionnez une région</option>
+                    <option value="JM">Abidjan-Lagunes</option>
+                    <option value="SRV">Comoe-Marahoué</option>
+                    <option value="JH">Mankono-Moyen-Comoe</option>
+                    <option value="BBK">Denguélé</option>
+                    <option value="AK">Savanes</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-900">
+                    Ville/Commune
+                  </label>
+                  <select className="mt-2 w-full rounded-lg border outline-none border-gray-300 bg-white p-2 text-gray-700 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 sm:text-sm">
+                    <option value="">Sélectionnez une ville</option>
+                    <option value="JM">Cocody</option>
+                    <option value="SRV">Plateau</option>
+                    <option value="JH">Djorobité</option>
+                    <option value="BBK">Yopougon</option>
+                  </select>
+                </div>
+
+                
+                 
+
+                <Box
+                  sx={{p: 2, backgroundColor: "#fff", borderRadius: 1 }}
                 >
-                  <option value="">Sélectionnez une région</option>
-                  <option value="JM">Abidjan-Lagunes</option>
-                  <option value="SRV">Comoe-Marahoué</option>
-                  <option value="JH">Mankono-Moyen-Comoe</option>
-                  <option value="BBK">Denguélé</option>
-                  <option value="AK">Savanes</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-900">
-                  Ville/Commune
-                </label>
-                <select
-                  className="mt-2 w-full rounded-lg border outline-none border-gray-300 bg-white p-2 text-gray-700 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 sm:text-sm"
-                >
-                  <option value="">Sélectionnez une ville</option>
-                  <option value="JM">Cocody</option>
-                  <option value="SRV">Plateau</option>
-                  <option value="JH">Djorobité</option>
-                  <option value="BBK">Yopougon</option>
-                </select>
-              </div>
-            </Box>
-          </Paper>
-        </Grid>
-
-        {/* Caractéristiques Techniques */}
-        <Grid item xs={12}>
-          <Paper elevation={1} sx={{ p: 3, backgroundColor: "#f9f9f9" }}>
-            <Typography variant="h6" gutterBottom>
-              Caractéristiques Techniques
-            </Typography>
-            <ul>
-              {technicalSpecs.map((spec, index) => (
-                <li key={index}>
-                  <Typography variant="body2">
-                    <strong>{spec.key}:</strong> {spec.value}
+                  <Typography
+                    variant="subtitle2"
+                    sx={{ fontWeight: "bold", mb: 1 }}
+                  >
+                    Points de relais
                   </Typography>
-                </li>
-              ))}
-            </ul>
-          </Paper>
-        </Grid>
+                  <Typography variant="body2" sx={{ mb: 1 }}>
+                    • Prêt pour le retrait entre 07 janvier et 08 janvier si vous commandez dans les prochaines 3hrs 3mins
+                  </Typography>
+                
 
-        {/* Avis */}
-        <Grid item xs={12}>
-          <Paper elevation={1} sx={{ p: 3, backgroundColor: "#f9f9f9" }}>
-            <ProductReviews
-              reviews={reviewsData.reviews}
-              averageRating={reviewsData.averageRating}
-            />
-          </Paper>
-        </Grid>
+                  <Typography
+                    variant="subtitle2"
+                    sx={{ fontWeight: "bold", mb: 1 }}
+                  >
+                    Politique de retour :
+                  </Typography>
+                  <Typography variant="body2" component="ul" sx={{ textAlign:"no-wrap"}}>
+                    • tours gratuits sur 10 jours <span> details</span>
+                  </Typography>
+                </Box>
+              </Box>
+            </Paper>
+          </Grid>
 
-        {/* Produits similaires */}
-        <Grid item xs={12}>
-          <RelatedProducts products={relatedProductsData} sx={{ mt: 2 }} />
-        </Grid>
+          {/* Caractéristiques Techniques */}
+          <Grid item xs={12}>
+            <Paper elevation={1} sx={{ p: 3, backgroundColor: "#f9f9f9" }}>
+              <Typography variant="h6" gutterBottom>
+                Caractéristiques Techniques
+              </Typography>
+              <ul>
+                {technicalSpecs.map((spec, index) => (
+                  <li key={index}>
+                    <Typography variant="body2">
+                      <strong>{spec.key}:</strong> {spec.value}
+                    </Typography>
+                  </li>
+                ))}
+              </ul>
+            </Paper>
+          </Grid>
 
+          {/* Avis */}
+          <Grid item xs={12}>
+            <Paper elevation={1} sx={{ p: 3, backgroundColor: "#f9f9f9" }}>
+              <ProductReviews
+                reviews={reviewsData.reviews}
+                averageRating={reviewsData.averageRating}
+              />
+            </Paper>
+          </Grid>
 
-        {/* Questions/Réponses 
+          {/* Produits similaires */}
+          <Grid item xs={12}>
+            <RelatedProducts products={relatedProductsData} sx={{ mt: 2 }} />
+          </Grid>
+
+          {/* Questions/Réponses 
         <Grid item xs={12}>
           <Paper elevation={1} sx={{ p: 3, backgroundColor: '#f9f9f9' }}>
             <Typography variant="h6" gutterBottom>Questions/Réponses</Typography>
@@ -258,8 +276,8 @@ const ProductDetailsPage: React.FC = () => {
           </Paper>
         </Grid>
         */}
-      </Grid>
-    </Container>
+        </Grid>
+      </Container>
     </Box>
   );
 };

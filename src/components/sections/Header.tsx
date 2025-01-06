@@ -14,6 +14,21 @@ import {
   FaShoppingBag,
   FaStar,
   FaCog,
+  FaHome,
+  FaBox,
+  FaStore,
+  FaMusic,
+  FaGem,
+  FaUserTie,
+  FaLaptop,
+  FaBuilding,
+  FaUsers,
+  FaMobileAlt,
+  FaTshirt,
+  FaCouch,
+  FaRunning,
+  FaSprayCan,
+  FaGuitar,
 } from "react-icons/fa";
 import {
   Drawer,
@@ -29,15 +44,6 @@ import {
 import PromoBanner from "./PromoBanner";
 
 import Link from "next/link";
-import {
-  Store,
-  Users,
-  Diamond,
-  Music,
-  ShoppingBag,
-  Laptop,
-  Building,
-} from "lucide-react";
 
 interface NavbarProps {
   cartCount: number;
@@ -101,12 +107,12 @@ export const Header: React.FC<NavbarProps> = ({
     </div>
   );
   const categories: Category[] = [
-    { title: "Électronique", icon: Laptop },
-    { title: "Mode", icon: ShoppingBag },
-    { title: "Maison", icon: Building },
-    { title: "Sports", icon: Users },
-    { title: "Beauté", icon: Diamond },
-    { title: "Musique", icon: Music },
+    { title: "Électronique", icon: FaMobileAlt },
+    { title: "Mode", icon: FaTshirt },
+    { title: "Maison", icon: FaCouch },
+    { title: "Sports", icon: FaRunning },
+    { title: "Beauté", icon: FaSprayCan },
+    { title: "Musique", icon: FaGuitar },
   ];
 
   const accounts: Account[] = [
@@ -121,32 +127,32 @@ export const Header: React.FC<NavbarProps> = ({
   const menuItems: MenuItem[] = [
     {
       title: "Shop",
-      icon: ShoppingBag,
+      icon: FaStore,
       items: [],
     },
     {
       title: "Digital Mall",
-      icon: Store,
+      icon: FaShoppingBag,
       items: [],
     },
     {
       title: "Social Media Manager",
-      icon: Users,
+      icon: FaUserTie,
       items: [],
     },
     {
       title: "Music Store",
-      icon: Music,
+      icon: FaMusic,
       items: [],
     },
     {
       title: "Diamond Ares",
-      icon: Diamond,
+      icon: FaGem,
       items: [],
     },
     {
       title: "Devenir Vendeur",
-      icon: Store,
+      icon: FaBox,
       items: [],
     },
   ];

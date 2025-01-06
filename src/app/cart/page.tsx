@@ -128,7 +128,7 @@ const CartPage: React.FC = () => {
       <div className="mt-6 flex justify-end">
         <Link
           href="/checkout"
-          className="bg-orange-500 text-white px-6 py-2 rounded hover:bg-orange-600"
+          className="bg-orange-600 text-white px-6 py-2 rounded hover:bg-orange-700"
         >
          Commander
         </Link>

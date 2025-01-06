@@ -6,6 +6,7 @@ import { Badge } from "@mui/material"; // Badge peut aussi être de Material-UI
 import { Timer, ShoppingCart } from "lucide-react";
 import { Chip } from "@mui/material"; // Import du Chip de Material-UI
 import { SlArrowRight } from "react-icons/sl";
+import Image from "next/image";
 interface FlashProduct {
   id: number;
   name: string;
@@ -107,9 +108,10 @@ const FlashSaleSection: React.FC<FlashSaleProps> = ({ endTime, products }) => {
 
             <CardContent className="p-4">
               <div className="aspect-square relative mb-4 overflow-hidden">
-                <img
+                <Image
                   src={product.image}
                   alt={product.name}
+                  fill
                   className="object-cover w-full h-full transition-transform duration-300 transform group-hover:scale-110 rounded-lg"
                 />
               </div>

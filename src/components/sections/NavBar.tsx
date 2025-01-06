@@ -2,28 +2,29 @@
 
 import React, { useState } from "react";
 import {
-  ChevronDown,
-  ShoppingCart,
-  Store,
-  Users,
-  Diamond,
-  Music,
-  Layers,
-  ShoppingBag,
-  Laptop,
-  Building,
-} from "lucide-react";
+  FaAngleDown,
+  FaShoppingCart,
+  FaStore,
+  FaUsers,
+  FaGem,
+  FaMusic,
+  FaLayerGroup,
+  FaShoppingBag,
+  FaLaptop,
+  FaBuilding,
+  FaBox
+} from "react-icons/fa";
 import Link from "next/link";
 
 type CategoryItem = {
   title: string;
   description: string;
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  icon: React.ComponentType<{ className?: string }>;
 };
 
 type Menu = {
   title: string;
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  icon: React.ComponentType<{ className?: string }>;
   link: string;
 };
 
@@ -34,33 +35,32 @@ const Navbar = () => {
     {
       title: "Électronique",
       description: "Smartphones, laptops, et accessoires",
-      icon: Laptop,
+      icon: FaLaptop,
     },
     {
       title: "Mode",
       description: "Vêtements, chaussures, et accessoires",
-      icon: ShoppingBag,
+      icon: FaShoppingBag,
     },
     {
       title: "Maison",
       description: "Meubles, décoration, et jardinage",
-      icon: Building,
+      icon: FaBuilding,
     },
     {
       title: "Sport",
       description: "Équipement sportif et vêtements",
-      icon: Users,
+      icon: FaUsers,
     },
   ];
 
   const menuItems: Menu[] = [
-    { title: "Boutique", icon: ShoppingCart, link: "/shop" },
-    { title: "Digital Mall", icon: Store, link: "/digital-mall" },
-    { title: "Social Media Manager", icon: Users, link: "/social-manager" },
-    { title: "Music Store", icon: Music, link: "/music-store" },
-
-    { title: "Diamonds Ares", icon: Diamond, link: "/diamonds-ares" },
-    { title: "Devenir Vendeur", icon: Store, link: "/multi-vendeur" },
+    { title: "Boutique", icon: FaShoppingCart, link: "/shop" },
+    { title: "Digital Mall", icon: FaStore, link: "/digital-mall" },
+    { title: "Social Media Manager", icon: FaUsers, link: "/social-manager" },
+    { title: "Music Store", icon: FaMusic, link: "/music-store" },
+    { title: "Diamonds Ares", icon: FaGem, link: "/diamonds-ares" },
+    { title: "Devenir Vendeur", icon: FaBox, link: "/multi-vendeur" },
   ];
 
   return (
@@ -74,9 +74,9 @@ const Navbar = () => {
               onMouseLeave={() => setIsCategoryOpen(false)}
               className="flex items-center space-x-2 py-4 px-6 text-white hover:text-gray-300 transition duration-300"
             >
-              <Layers className="h-5 w-5" />
+              <FaLayerGroup className="h-5 w-5" />
               <span className="font-medium">Catégories</span>
-              <ChevronDown
+              <FaAngleDown
                 className={`h-4 w-4 transition-transform duration-300 ${
                   isCategoryOpen ? "rotate-180" : ""
                 }`}

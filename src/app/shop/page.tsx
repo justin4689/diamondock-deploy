@@ -5,19 +5,19 @@ import {
   Box,
   Card,
   CardContent,
-  CardMedia,
+  
   Typography,
   Grid,
   Paper,
   Rating,
-  IconButton,
+
   Link,
   FormGroup,
   FormControlLabel,
   Checkbox,
   Slider,
   TextField,
-  Badge,
+
   MenuItem,
   Pagination,
   Drawer,
@@ -32,6 +32,7 @@ import {
   AttachMoney,
   Grading,
 } from "@mui/icons-material";
+import Image from "next/image";
 
 // Constantes et données
 const categories: string[] = [
@@ -696,17 +697,20 @@ const ShopPage: React.FC = () => {
             <Grid item xs={6} sm={4} md={4} lg={3} key={product.id}>
               <Card key={product.id} className="relative group rounded-lg">
                 <div
-                  className="absolute top-3 right-0 bg-orange-500 text-white text-sm font-bold rounded-full px-1 md:px-2 md:py-1 z-50"
-                  style={{ backgroundColor: "#F57C00" }} // Couleur orange pure
+                  className="absolute top-3 right-0 bg-orange-600 text-white text-sm font-bold rounded-full px-1 md:px-2 md:py-1 z-50"
+                  style={{ backgroundColor: "#EF6C00" }} // Couleur orange pure
                 >
                   -{product.discount}%
                 </div>
 
                 <CardContent className="p-4 flex flex-col h-full">
                   <div className="aspect-square relative mb-4 overflow-hidden">
-                    <img
+                    <Image  
                       src={product.image}
                       alt={product.name}
+                    
+                      width={200}
+                      height={200}
                       className="object-cover w-full h-full transition-transform duration-300 transform group-hover:scale-110 rounded-lg"
                     />
                   </div>
@@ -741,13 +745,13 @@ const ShopPage: React.FC = () => {
                       startIcon={<ShoppingCart size={16} />}
                       fullWidth
                       sx={{
-                        bgcolor: "#F57C00",
+                        bgcolor: "#EF6C00",
                         mb: 2,
                         fontSize: { xs: "0.55rem", lg: "0.8rem" }, // Taille du texte
                         py: { xs: 1, sm: 1.5 }, // Padding vertical
                       }}
                     >
-                      J'achète
+                      J&apos;achète
                     </Button>
                   </div>
                 </CardContent>
