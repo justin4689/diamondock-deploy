@@ -7,11 +7,8 @@ import {
   Box,
   Typography,
   Paper,
-  Divider,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
+  Divider
+
 } from "@mui/material";
 
 import ProductImageGallery from "@/components/sections/ProductDetails/ProductImageGallery";

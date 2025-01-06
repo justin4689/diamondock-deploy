@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Tooltip from "@mui/material/Tooltip";
+import Image from "next/image";
 
 import {
   FaShoppingCart,
@@ -13,7 +14,6 @@ import {
   FaShoppingBag,
   FaStar,
   FaCog,
-  
 } from "react-icons/fa";
 import {
   Drawer,
@@ -30,13 +30,10 @@ import PromoBanner from "./PromoBanner";
 
 import Link from "next/link";
 import {
-  ChevronDown,
-  ShoppingCart,
   Store,
   Users,
   Diamond,
   Music,
-  Layers,
   ShoppingBag,
   Laptop,
   Building,
@@ -51,27 +48,27 @@ interface NavbarProps {
 
 type MenuItem = {
   title: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   items: Array<{
     name: string;
-    icon: React.ComponentType<any>;
+    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
     description?: string;
     subItems?: Array<{
       title: string;
       description: string;
-      icon: React.ComponentType<any>;
+      icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
     }>;
   }>;
 };
 
 type Account = {
   title: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 };
 
 type Category = {
   title: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 };
 
 export const Header: React.FC<NavbarProps> = ({
@@ -87,7 +84,13 @@ export const Header: React.FC<NavbarProps> = ({
     setIsDrawerOpen(!isDrawerOpen);
   };
 
-  const IconButton = ({ icon: Icon, count }: { icon: any; count: number }) => (
+  const IconButton = ({
+    icon: Icon,
+    count,
+  }: {
+    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+    count: number;
+  }) => (
     <div className="relative cursor-pointer">
       <Icon className="text-2xl text-gray-500 hover:text-[#2E3192] transition-colors" />
       {count > 0 && (
@@ -109,13 +112,10 @@ export const Header: React.FC<NavbarProps> = ({
   const accounts: Account[] = [
     { title: "Mes commandes", icon: FaShoppingBag },
     { title: "Mes favoris", icon: FaHeart },
-    
-    { title: "Mes avis", icon: FaStar },
-    
-    { title: "Mes paramètres", icon: FaCog },
-    
-   
 
+    { title: "Mes avis", icon: FaStar },
+
+    { title: "Mes paramètres", icon: FaCog },
   ];
 
   const menuItems: MenuItem[] = [
@@ -152,7 +152,10 @@ export const Header: React.FC<NavbarProps> = ({
   ];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[60] bg-white shadow-sm"  style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+    <div
+      className="fixed top-0 left-0 right-0 z-[60] bg-white shadow-sm"
+      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+    >
       <PromoBanner />
 
       <nav className="bg-white">
@@ -162,7 +165,13 @@ export const Header: React.FC<NavbarProps> = ({
             {/* Logo */}
             <Link href="/">
               <div className="flex items-center">
-                <img src="/logo.png" alt="logo" className="h-10 md:h-12" />
+                <Image
+                  src="/logo.png"
+                  alt="logo"
+                  width={200}
+                  height={200}
+                  className=" md:h-12"
+                />
               </div>
             </Link>
 
@@ -176,7 +185,7 @@ export const Header: React.FC<NavbarProps> = ({
                   className="w-full pl-4 pr-12 py-2 text-md rounded-full text-gray-500 ring-1 ring-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none focus:shadow-md"
                   placeholder="Rechercher ici..."
                 />
-                <button className="absolute right-0 top-0 h-full px-4 bg-orange-500 rounded-r-full flex items-center justify-center">
+                <button className="absolute right-0 top-0 h-full px-4 bg-orange-600 rounded-r-full flex items-center justify-center">
                   <FaSearch className="text-white" />
                 </button>
               </div>
@@ -197,7 +206,7 @@ export const Header: React.FC<NavbarProps> = ({
               <div className="flex items-center space-x-2 cursor-pointer group">
                 <div className="relative">
                   <FaShoppingCart className="text-2xl text-gray-500 group-hover:text-[#2E3192] transition-colors" />
-                  <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  <span className="absolute -top-2 -right-2 bg-orange-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     {cartCount}
                   </span>
                 </div>
@@ -214,13 +223,11 @@ export const Header: React.FC<NavbarProps> = ({
 
             {/* Mobile Menu Button */}
             <div className="lg:hidden flex flex-row space-x-2 items-center">
-              
-
               <div className="lg:hidden flex flex-col items-center">
                 <Tooltip title="Panier" placement="bottom">
                   <div className="relative">
                     <FaShoppingCart className="text-2xl text-gray-500" />
-                    <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    <span className="absolute -top-2 -right-2 bg-orange-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                       {cartCount}
                     </span>
                   </div>
@@ -245,7 +252,7 @@ export const Header: React.FC<NavbarProps> = ({
                 className="w-full pl-4 pr-12 py-2 text-md rounded-full text-gray-500 ring-1 ring-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none focus:shadow-md"
                 placeholder="Rechercher ici..."
               />
-              <button className="absolute right-0 top-0 h-full px-4 bg-orange-500 rounded-r-full flex items-center justify-center">
+              <button className="absolute right-0 top-0 h-full px-4 bg-orange-600 rounded-r-full flex items-center justify-center">
                 <FaSearch className="text-white" />
               </button>
             </div>
@@ -266,7 +273,7 @@ export const Header: React.FC<NavbarProps> = ({
           }}
         >
           {/* User Profile Section */}
-          <div className="bg-orange-500 text-white p-4 flex items-center">
+          <div className="bg-orange-600 text-white p-4 flex items-center">
             <Avatar
               alt="User Profile"
               sx={{

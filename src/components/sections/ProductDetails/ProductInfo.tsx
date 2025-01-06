@@ -136,9 +136,9 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
           startIcon={<ShoppingCartIcon />}
           onClick={handleAddToCart}
           disabled={!inStock}
-          sx={{ width: "100%", backgroundColor: "#FB8C00", color: "white" }}
+          sx={{ width: "100%", backgroundColor: "#EF6C00", color: "white" }}
         >
-          J'achète
+          J&apos;achète
         </Button>
       </Box>
 

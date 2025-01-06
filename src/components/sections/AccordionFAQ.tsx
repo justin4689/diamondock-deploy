@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 
 const AccordionFAQ = () => {
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  const toggleAccordion = (index: any) => {
+  const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
@@ -17,13 +17,14 @@ const AccordionFAQ = () => {
             Nous agissons en votre nom pour créer et gérer une communauté sur
             les réseaux sociaux, en veillant au contrôle et à la sécurité des
             informations publiées. Notre gestionnaire de communauté vous propose
-            les services suivants dans le cadre du plan "Basic", en respectant
-            une procédure rigoureuse pour la réception de vos contenus, adaptée
-            au type de réseau social choisi (Facebook ou Instagram Business) :
+            les services suivants dans le cadre du plan &quot;Basic&quot;, en
+            respectant une procédure rigoureuse pour la réception de vos
+            contenus, adaptée au type de réseau social choisi (Facebook ou
+            Instagram Business) :
           </p>
           <ol className="list-decimal ml-6 mt-2 space-y-2">
             <li>
-              <strong>Création ou Gestion Simple d’une Page :</strong>
+              <strong>Création ou Gestion Simple d&apos;une Page :</strong>
               <ul className="list-disc ml-6 mt-1 space-y-1">
                 <li>
                   Nous mettons en place et gérons une page sur le réseau social
@@ -71,7 +72,8 @@ const AccordionFAQ = () => {
                 </li>
                 <li>
                   Les indicateurs clés de performance (KPI) sont inclus, vous
-                  permettant d’évaluer l’efficacité de votre présence en ligne.
+                  permettant d&apos;évaluer l&apos;efficacité de votre présence
+                  en ligne.
                 </li>
               </ul>
             </li>
@@ -109,8 +111,8 @@ const AccordionFAQ = () => {
                   plateformes sociales principales: Facebook ou Instagram.
                 </li>
                 <li>
-                  L'objectif est d'etablir une présence solide et cohérente pour
-                  votre entreprise. sur ces reseaux sociaux.
+                  L&apos;objectif est d&apos;etablir une présence solide et
+                  cohérente pour votre entreprise. sur ces reseaux sociaux.
                 </li>
               </ul>
             </li>
@@ -136,8 +138,8 @@ const AccordionFAQ = () => {
                   commentaires et messages des utilisateurs.
                 </li>
                 <li>
-                  Nous encouragons l'interaction en engageant activement avec la
-                  communauté .
+                  Nous encouragons l&apos;interaction en engageant activement
+                  avec la communauté .
                 </li>
                 <li>
                   Notre objectif est de creer un dialogue positif et constructif
@@ -170,7 +172,8 @@ const AccordionFAQ = () => {
                 </li>
                 <li>
                   Les indicateurs clés de performance (KPI) sont inclus, vous
-                  permettant d’évaluer l’efficacité de votre présence en ligne.
+                  permettant d&apos;évaluer l&apos;efficacité de votre présence
+                  en ligne.
                 </li>
               </ul>
             </li>
@@ -208,8 +211,9 @@ const AccordionFAQ = () => {
                   sociales principales: Facebook,Instagram et TikTok.
                 </li>
                 <li>
-                  L'objectif est d'etablir une présence solide et cohérente pour
-                  votre entreprise sur l'un ces reseaux sociaux.
+                  L&apos;objectif est d&apos;etablir une présence solide et
+                  cohérente pour votre entreprise sur l&apos;un ces reseaux
+                  sociaux.
                 </li>
               </ul>
             </li>
@@ -237,8 +241,8 @@ const AccordionFAQ = () => {
                   commentaires et messages des utilisateurs.
                 </li>
                 <li>
-                  Nous encouragons l'interaction en engageant activement avec la
-                  communauté.
+                  Nous encouragons l&apos;interaction en engageant activement
+                  avec la communauté.
                 </li>
                 <li>
                   la personnalisation est au coeur de notre approche pour
@@ -329,7 +333,7 @@ const AccordionFAQ = () => {
     },
   ];
   return (
-    <div className="bg-white">
+    <div className="bg-white pb-4">
       <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-6">
         <div className="mx-auto max-w-4xl divide-y divide-gray-900/10">
           <h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900">

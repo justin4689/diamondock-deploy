@@ -1,6 +1,7 @@
 // components/Footer.tsx
 import React from 'react';
 import { FaArrowRight, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaFacebookF, FaInstagram, FaTwitter, FaSnapchatGhost, FaTiktok } from 'react-icons/fa';
+import Image from 'next/image';
 
 const Footer: React.FC = () => {
   return (
@@ -8,12 +9,18 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Logo and Description */}
         <div>
-          <img src="/logo.png" alt="logo" className="h-10 md:h-12" />
+          <Image
+            src="/logo.png"
+            alt="logo"
+            className="h-10 md:h-12"
+            width={100}
+            height={100}
+          />
           <p className="mb-4 text-xs md:text-sm">
-            Nous sommes bien plus qu’un simple gestionnaire de réseaux sociaux. Nous sommes votre allié pour vous propulser aux sommets sur le digital.
+            Nous sommes bien plus qu&apos;un simple gestionnaire de réseaux sociaux. Nous sommes votre allié pour vous propulser aux sommets sur le digital.
           </p>
           <button className="bg-gray-600 text-white py-2 px-4 rounded">
-            PLUS D'INFOS
+            PLUS D&apos;INFOS
           </button>
         </div>
 
@@ -31,14 +38,10 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Newsletter Subscription */}
-        <div>
+        <div >
           <h3 className="font-bold mb-4">ACTUALITÉS</h3>
-          <form>
-            <input
-              type="text"
-              placeholder="Nom"
-              className="w-full mb-2 p-2 rounded bg-gray-800 text-white"
-            />
+          <form className="flex flex-col gap-2 justify-center items-center">
+           
             <input
               type="email"
               placeholder="Email"
@@ -74,11 +77,11 @@ const Footer: React.FC = () => {
             Abidjan, Côte d’Ivoire.
           </p>
           <div className="flex space-x-4 mt-4">
-            <a href="#"><FaFacebookF className="text-blue-500" /></a>
-            <a href="#"><FaInstagram className="text-pink-500" /></a>
-            <a href="#"><FaTwitter className="text-blue-400" /></a>
-            <a href="#"><FaSnapchatGhost className="text-yellow-500" /></a>
-            <a href="#"><FaTiktok className="text-black" /></a>
+            <a href="https://www.facebook.com/p/Diamondock-100081122032326/"><FaFacebookF className="text-blue-500" /></a>
+            <a href="https://www.instagram.com/diamondock/"><FaInstagram className="text-pink-500" /></a>
+            <a href="https://twitter.com/diamondock"><FaTwitter className="text-blue-400" /></a>
+            <a href="https://www.snapchat.com/add/diamondock"><FaSnapchatGhost className="text-yellow-500" /></a>
+            <a href="https://www.tiktok.com/@diamondock"><FaTiktok className="text-black" /></a>
           </div>
         </div>
       </div>
@@ -91,7 +94,7 @@ const Footer: React.FC = () => {
           <a href="#" className="text-white mr-4">Privacy</a>
           <a href="#" className="text-white">Return policies</a>
           <p className="text-white mt-2">
-            © 2008-2024 Diamonddock by Univers Digital Marc Diamond | All Rights Reserved.
+            © 2008-2024 Diamondock by Univers Digital Marc Diamond | All Rights Reserved.
           </p>
         </div>
       </div>

@@ -12,7 +12,8 @@ import {
   Button,
   IconButton,
 } from "@mui/material";
-import { ShoppingCart, MoreVertical, Plus, Trash } from "lucide-react";
+import { ShoppingCart, Plus, Trash } from "lucide-react";
+import Image from "next/image";
 
 const WishlistPage: React.FC = () => {
   // États
@@ -97,9 +98,11 @@ const WishlistPage: React.FC = () => {
 
               <CardContent className="p-4 flex flex-col h-full">
                 <div className="aspect-square relative mb-4 overflow-hidden">
-                  <img
+                  <Image
                     src={item.image}
                     alt={item.name}
+                    width={100}
+                    height={100}
                     className="object-cover w-full h-full transition-transform duration-300 transform group-hover:scale-110 rounded-lg"
                   />
                 </div>
@@ -140,7 +143,7 @@ const WishlistPage: React.FC = () => {
                       py: { xs: 1, sm: 1.5 }, // Padding vertical
                     }}
                   >
-                    J'achète
+                    J&apos;achète
                   </Button>
 
                   {/* Bouton pour supprimer le produit */}

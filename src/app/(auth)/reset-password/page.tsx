@@ -30,6 +30,7 @@ export default function ResetPasswordPage() {
   const onSubmit = async (data: ResetPasswordFormValues) => {
     try {
       // Reset previous status
+      console.log(data);
       setResetStatus({});
 
       // Here you would typically call your backend reset password endpoint
