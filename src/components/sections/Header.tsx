@@ -1,8 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Tooltip from "@mui/material/Tooltip";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useCartStore } from "@/store/useCartStore";
 
 import {
   FaShoppingCart,
@@ -39,11 +43,16 @@ import {
   ListItemButton,
   ListItemIcon,
   Avatar,
+  Button,
 } from "@mui/material";
 
 import PromoBanner from "./PromoBanner";
 
 import Link from "next/link";
+
+import MenuDropdown from "./MenuDropdown";
+import { apiUrl } from "@/app/config";
+import { UserProfile } from "@/types/User";
 
 interface NavbarProps {
   cartCount: number;
@@ -83,12 +92,42 @@ export const Header: React.FC<NavbarProps> = ({
   userCount,
   totalPrice,
 }) => {
+  const {
+    items,
+    removeItem,
+    updateQuantity,
+    clearCart,
+    getTotal,
+    getShippingCost,
+  } = useCartStore();
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const { data: session } = useSession();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
 
   const handleDrawerToggle = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push(`/shop?search=${encodeURIComponent(searchQuery)}`);
+    setSearchQuery("");
+  };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      setIsMenuOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const IconButton = ({
     icon: Icon,
@@ -157,6 +196,7 @@ export const Header: React.FC<NavbarProps> = ({
     },
   ];
 
+
   return (
     <div
       className="fixed top-0 left-0 right-0 z-[60] bg-white shadow-sm"
@@ -182,28 +222,41 @@ export const Header: React.FC<NavbarProps> = ({
             </Link>
 
             {/* Search Bar - hidden on mobile */}
-            <div className="hidden lg:flex flex-grow mx-4 max-w-2xl">
-              <div className="relative w-full">
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-4 pr-12 py-2 text-md rounded-full text-gray-500 ring-1 ring-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none focus:shadow-md"
-                  placeholder="Rechercher ici..."
-                />
-                <button className="absolute right-0 top-0 h-full px-4 bg-orange-600 rounded-r-full flex items-center justify-center">
-                  <FaSearch className="text-white" />
-                </button>
+            <form onSubmit={handleSearch} className="w-1/2">
+              <div className="hidden lg:flex  mx-4 ">
+                <div className="relative w-full">
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-4 pr-12 py-2 text-md rounded-full text-gray-500 ring-1 ring-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none focus:shadow-md"
+                    placeholder="Rechercher ici..."
+                  />
+                  <button
+                    type="submit"
+                    className="absolute right-0 top-0 h-full px-4 bg-orange-600 rounded-r-full flex items-center justify-center"
+                  >
+                    <FaSearch className="text-white" />
+                  </button>
+                </div>
               </div>
-            </div>
+            </form>
 
             {/* Desktop Icons */}
-            <div className="hidden lg:flex items-center space-x-6">
-              <Tooltip title="Se connecter" placement="bottom">
-                <Link href="/login">
-                  <IconButton icon={FaUser} count={userCount} />
-                </Link>
-              </Tooltip>
+            <div className="hidden lg:flex items-center space-x-6 ">
+              {session?.accessToken ? (
+                <MenuDropdown
+                  isMenuOpen={isMenuOpen}
+                  setIsMenuOpen={setIsMenuOpen}
+                  userProfile={session?.user?.name}
+                />
+              ) : (
+                <Tooltip title="Se connecter" placement="bottom">
+                  <Link href="/login">
+                    <IconButton icon={FaUser} count={userCount} />
+                  </Link>
+                </Tooltip>
+              )}
               <Tooltip title="Liste des envies" placement="bottom">
                 <Link href="/wishlist">
                   <IconButton icon={FaHeart} count={wishlistCount} />
@@ -213,15 +266,13 @@ export const Header: React.FC<NavbarProps> = ({
                 <div className="relative">
                   <FaShoppingCart className="text-2xl text-gray-500 group-hover:text-[#2E3192] transition-colors" />
                   <span className="absolute -top-2 -right-2 bg-orange-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                    {cartCount}
+                    {items.length}
                   </span>
                 </div>
                 <Link href="/cart">
                   <div className="flex flex-col">
-                    <span className="text-sm text-gray-500">Mon panier</span>
-                    <span className="font-bold text-gray-700">
-                      {totalPrice.toFixed(2)} FCFA
-                    </span>
+                    <span className="text-sm text-gray-500"> panier</span>
+                  
                   </div>
                 </Link>
               </div>
@@ -249,20 +300,25 @@ export const Header: React.FC<NavbarProps> = ({
           </div>
 
           {/* Mobile Search - visible only on mobile */}
-          <div className="lg:hidden px-2 pb-4 mt-2">
-            <div className="relative">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-4 pr-12 py-2 text-md rounded-full text-gray-500 ring-1 ring-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none focus:shadow-md"
-                placeholder="Rechercher ici..."
-              />
-              <button className="absolute right-0 top-0 h-full px-4 bg-orange-600 rounded-r-full flex items-center justify-center">
-                <FaSearch className="text-white" />
-              </button>
+          <form onSubmit={handleSearch}>
+            <div className="lg:hidden px-2 pb-4 mt-2">
+              <div className="relative">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-4 pr-12 py-2 text-md rounded-full text-gray-500 ring-1 ring-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none focus:shadow-md"
+                  placeholder="Rechercher ici..."
+                />
+                <button
+                  type="submit"
+                  className="absolute right-0 top-0 h-full px-4 bg-orange-600 rounded-r-full flex items-center justify-center"
+                >
+                  <FaSearch className="text-white" />
+                </button>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
 
         {/* Mobile Drawer Menu */}
@@ -291,7 +347,10 @@ export const Header: React.FC<NavbarProps> = ({
               }}
             ></Avatar>
             <div>
-              <h2 className="text-lg font-bold">Se Connecter</h2>
+              <h2 className="text-lg font-bold">
+                {/* {userProfile ? userProfile.firstname : "Se Connecter"} */}
+                Se Connecter
+              </h2>
               <p className="text-sm">Accédez à votre compte</p>
             </div>
           </div>

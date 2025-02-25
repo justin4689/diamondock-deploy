@@ -1,8 +1,8 @@
+'use client'
 import React, { useState } from "react";
 import {
   Box,
   Grid,
-  ImageList,
   ImageListItem,
   Dialog,
   DialogContent,
@@ -10,7 +10,14 @@ import {
 import Image from "next/image";
 
 interface ProductImageGalleryProps {
-  images: string[];
+  images: {
+    id: number;
+    image_url: string;
+    is_primary: number;
+    product_id: number;
+    created_at: string;
+    updated_at: string;
+  }[];
   alt: string;
   sx?: any;
 }
@@ -20,11 +27,13 @@ const ProductImageGallery: React.FC<ProductImageGalleryProps> = ({
   alt,
   sx,
 }) => {
-  const [selectedImage, setSelectedImage] = useState<string>(images[0]);
+  const [selectedImage, setSelectedImage] = useState<string>(
+    images.length > 0 ? images[0].image_url : "" // Défaut : première image ou chaîne vide
+  );
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
-  const handleImageClick = (image: string) => {
-    setSelectedImage(image);
+  const handleImageClick = (imageUrl: string) => {
+    setSelectedImage(imageUrl);
   };
 
   const handleOpenDialog = () => {
@@ -35,42 +44,45 @@ const ProductImageGallery: React.FC<ProductImageGalleryProps> = ({
     setOpenDialog(false);
   };
 
+  if (images.length === 0) {
+    return <Box>Aucune image disponible</Box>;
+  }
+
   return (
     <Box>
       <Grid container spacing={2}>
         {/* Galerie de miniatures */}
         <Grid item xs="auto">
-        
-            {images.map((image, index) => (
-              <ImageListItem
-                key={index}
-                sx={{
-                  opacity: selectedImage === image ? 1 : 0.6,
-                  cursor: "pointer",
-                  border:
-                    selectedImage === image ? "2px solid primary.main" : "none",
-                  borderRadius: "4px",
-                  marginTop: 1,
+          {images.map((image, index) => (
+            <ImageListItem
+              key={image.id} // Utilisation de `id` comme clé
+              sx={{
+                opacity: selectedImage === image.image_url ? 1 : 0.6,
+                cursor: "pointer",
+                border:
+                  selectedImage === image.image_url
+                    ? "2px solid primary.main"
+                    : "none",
+                borderRadius: "4px",
+                marginTop: 1,
+                objectFit: "cover",
+                width: "80px",
+                height: "80px",
+              }}
+              onClick={() => handleImageClick(image.image_url)} // Utilisation de `image_url`
+            >
+              <Image
+                src={image.image_url}
+                alt={`${alt} thumbnail ${index + 1}`}
+                width={80}
+                height={80}
+                style={{
                   objectFit: "cover",
-                  width: "80px",
-                  height: "80px",
-            
+                  borderRadius: "4px",
                 }}
-                onClick={() => handleImageClick(image)}
-              >
-                <Image
-                  src={image}
-                  alt={`${alt} thumbnail ${index + 1}`}
-                  width={80}
-                  height={80}
-                  style={{
-                    objectFit: "cover",
-                    borderRadius: "4px",
-                  }}
-                />
-              </ImageListItem>
-            ))}
-         
+              />
+            </ImageListItem>
+          ))}
         </Grid>
 
         {/* Image principale */}

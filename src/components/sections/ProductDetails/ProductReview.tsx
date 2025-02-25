@@ -1,4 +1,5 @@
-import React from 'react';
+'use client'
+import React, { useState } from 'react';
 import { 
   Box, 
   Typography, 
@@ -6,27 +7,41 @@ import {
   Avatar, 
   Paper, 
   Divider, 
-  LinearProgress
+  LinearProgress,
+  Button
 } from '@mui/material';
+import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
+
+interface User {
+  id: number;
+  firstname: string;
+  lastname: string;
+  image_url: string | null;
+}
 
 interface Review {
-  id: string;
-  author: string;
-  date: string;
-  rating: number;
+  id: number;
+  title: string;
   comment: string;
-  authorAvatar?: string;
+  rating: number;
+  created_at: string;
+  user: User;
 }
 
 interface ProductReviewsProps {
   reviews: Review[];
-  averageRating: number;
 }
 
-const ProductReviews: React.FC<ProductReviewsProps> = ({ 
-  reviews, 
-  averageRating 
-}) => {
+const REVIEWS_PER_PAGE = 1;
+
+const ProductReviews: React.FC<ProductReviewsProps> = ({ reviews }) => {
+  const [displayedReviews, setDisplayedReviews] = useState(REVIEWS_PER_PAGE);
+
+  // Calculate average rating
+  const averageRating = reviews.length > 0 
+    ? reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length 
+    : 0;
+
   // Fonction pour calculer la distribution des notes
   const calculateRatingDistribution = () => {
     const distribution = [0, 0, 0, 0, 0];
@@ -37,6 +52,56 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({
   };
 
   const ratingDistribution = calculateRatingDistribution();
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('fr-FR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  const handleShowMore = () => {
+    setDisplayedReviews(prev => Math.min(prev + REVIEWS_PER_PAGE, reviews.length));
+  };
+
+  const visibleReviews = reviews.slice(0, displayedReviews);
+
+  if (reviews.length === 0) {
+    return (
+      <Box sx={{ p: 2 }}>
+        <Typography variant="h5" gutterBottom>
+          Avis Clients
+        </Typography>
+        <Paper 
+          elevation={0} 
+          sx={{ 
+            p: 4,
+            border: '1px solid',
+            borderColor: 'divider',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            textAlign: 'center',
+            backgroundColor: '#f9f9f9'
+          }}
+        >
+          <RateReviewOutlinedIcon 
+            sx={{ 
+              fontSize: 60, 
+              color: 'text.secondary',
+              mb: 2
+            }} 
+          />
+          <Typography variant="h6" gutterBottom color="text.secondary">
+            Aucun avis pour le moment
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Soyez le premier à donner votre avis sur ce produit
+          </Typography>
+        </Paper>
+      </Box>
+    );
+  }
 
   return (
     <Box sx={{ p: 2 }}>
@@ -68,7 +133,7 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({
               mb: 1 
             }}
           >
-            <Typography variant="body2" sx={{ mr: 2 }}>
+            <Typography variant="body2" sx={{ mr: 2, minWidth: '70px' }}>
               {star} étoiles
             </Typography>
             <Box sx={{ width: '100%', mr: 1 }}>
@@ -78,7 +143,7 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({
                 color="primary"
               />
             </Box>
-            <Typography variant="body2">
+            <Typography variant="body2" sx={{ minWidth: '30px' }}>
               {ratingDistribution[index]}
             </Typography>
           </Box>
@@ -87,79 +152,71 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({
 
       <Divider sx={{ mb: 3 }} />
 
-     {/* Liste des avis */}
-{reviews.map((review) => (
-  <Paper 
-    key={review.id} 
-    elevation={0} 
-    sx={{ 
-      p: 2, 
-      mb: 2, 
-      border: '1px solid', 
-      borderColor: 'divider',
-      display: 'flex',
-      flexDirection: { xs: 'column', sm: 'row' }, // Adjust layout for small screens
-      alignItems: { sm: 'center' }
-    }}
-  >
-    <Box 
-      sx={{ 
-        display: 'flex', 
-        alignItems: 'center', 
-        mb: { xs: 2 , sm: 0  }, // Margin-bottom only for small screens
-        mr: { sm: 2 } // Margin-right for non-small screens
-      }}
-    >
-      <Avatar 
-        src={review.authorAvatar} 
-        alt={review.author} 
-        sx={{ 
-          mr: {  xs: 2 }, // Remove margin-right for small screens
-          mb: { xs: 1, sm: 0 } // Add margin-bottom for small screens
-        }}
-      />
-      <Box >
-        <Typography 
-          variant="subtitle1" 
-          sx={{ display: { xs: 'block', md: 'block' } }}
+      {/* Liste des avis */}
+      {visibleReviews.map((review) => (
+        <Paper 
+          key={review.id} 
+          elevation={0} 
+          sx={{ 
+            p: 2, 
+            mb: 2, 
+            border: '1px solid', 
+            borderColor: 'divider',
+          }}
         >
-          {review.author}
-        </Typography>
-        <Typography 
-          variant="body2" 
-          color="text.secondary"
-          sx={{ fontSize: { xs: '0.8rem', sm: 'inherit' } }} // Smaller font for small screens
-        >
-          {review.date}
-        </Typography>
-      </Box>
-    </Box>
-    <Box 
-      sx={{
-        flex: 1, 
-        display: 'flex', 
-        flexDirection: 'column',
-        justifyContent: 'space-between'
-      }}
-    >
-      <Typography 
-        variant="body1" 
-        sx={{ mb: { xs: 1, sm: 0 }, fontSize: { xs: '0.9rem', sm: 'inherit' } }}
-      >
-        {review.comment}
-      </Typography>
-      <Rating 
-        value={review.rating} 
-        readOnly 
-        sx={{ 
-          mt: { xs: 1, sm: 0 }, 
-          alignSelf: { xs: 'flex-start', sm: 'flex-end' } // Adjust alignment
-        }}
-      />
-    </Box>
-  </Paper>
-))}
+          <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+            <Avatar 
+              src={review.user.image_url || undefined}
+              alt={`${review.user.firstname} ${review.user.lastname}`}
+              sx={{ mr: 2 }}
+            >
+              {review.user.firstname[0]}
+            </Avatar>
+            <Box>
+              <Typography variant="subtitle1">
+                {`${review.user.firstname} ${review.user.lastname}`}
+              </Typography>
+              <Typography variant="caption" color="text.secondary">
+                {formatDate(review.created_at)}
+              </Typography>
+            </Box>
+          </Box>
+          
+          <Box sx={{ mb: 1 }}>
+            <Rating value={review.rating} readOnly size="small" />
+          </Box>
+          
+          <Typography variant="h6" gutterBottom>
+            {review.title}
+          </Typography>
+          
+          <Typography variant="body2" color="text.secondary">
+            {review.comment}
+          </Typography>
+        </Paper>
+      ))}
 
+      {/* Bouton "Voir plus" */}
+      {displayedReviews < reviews.length && (
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+          <Button 
+            variant="outlined" 
+            onClick={handleShowMore}
+            sx={{ 
+              px: 4,
+              py: 1,
+              borderColor: 'primary.main',
+              color: 'primary.main',
+              '&:hover': {
+                borderColor: 'primary.dark',
+                backgroundColor: 'primary.light',
+              }
+            }}
+          >
+            Voir plus d'avis ({reviews.length - displayedReviews} restants)
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 };

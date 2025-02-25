@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import {
   Container,
@@ -8,106 +6,113 @@ import {
   Typography,
   Paper,
   Divider,
+  Rating,
 } from "@mui/material";
+import { Metadata } from "next";
 
 import ProductImageGallery from "@/components/sections/ProductDetails/ProductImageGallery";
 import ProductInfo from "@/components/sections/ProductDetails/ProductInfo";
 import ProductReviews from "@/components/sections/ProductDetails/ProductReview";
 import RelatedProducts from "@/components/sections/ProductDetails/RelatedProducts";
+import ReviewForm from '@/components/ReviewForm';
+import { fetchProductDetails } from "@/lib/api/productService";
+import { fetchReviews } from "@/lib/api/reviewsService";
 
 interface ProductImageGalleryProps {
   images: string[];
   alt: string;
   sx?: any;
 }
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const { slug } = await params;
 
-const ProductDetailsPage: React.FC = () => {
+  const productData = await fetchProductDetails(slug);
+  
+const primaryImage = productData.images?.find((image:any)=> image.is_primary === 1);
+
+
+
+  return {
+    title: `${productData.name} | Boutique`,
+    description: productData.description || "Découvrez ce produit exceptionnel.",
+    openGraph: {
+      title: productData.name,
+      description: productData.description,
+      images: primaryImage ? [{ url: primaryImage.image_url, width: 800, height: 600 }] : [],
+    },
+  };
+}
+
+
+
+export default async function ProductDetailsPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
   // Exemple de données de produit (normalement récupérées depuis une API)
-  const productData = {
-    id: "prod-001",
-    name: "Veste en Cuir Élégante",
-    price: 299.99,
-    description:
-      "Une veste en cuir de haute qualité, parfaite pour un look sophistiqué et moderne. Fabriquée avec des matériaux premium et une coupe impeccable.",
-    images: [
-      "https://images.pexels.com/photos/887898/pexels-photo-887898.jpeg?auto=compress&cs=tinysrgb&w=600",
-      "https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=600",
-      "https://images.pexels.com/photos/1124468/pexels-photo-1124468.jpeg?auto=compress&cs=tinysrgb&w=600",
-      "https://images.pexels.com/photos/1833082/pexels-photo-1833082.jpeg?auto=compress&cs=tinysrgb&w=600",
-    ],
-    rating: 4.5,
-    reviewCount: 127,
-    inStock: true,
-    sizes: ["XS", "S", "M", "L", "XL"],
-    colors: ["Noir", "Marron", "Cognac"],
-  };
 
-  const reviewsData = {
-    averageRating: 4.5,
-    reviews: [
-      {
-        id: "rev-001",
-        author: "Marie Dupont",
-        date: "12 novembre 2023",
-        rating: 5,
-        comment: "Qualité exceptionnelle, très satisfaite de mon achat !",
-        authorAvatar: "/images/avatar-marie.jpg",
-      },
-      {
-        id: "rev-002",
-        author: "Jean Martin",
-        date: "5 octobre 2023",
-        rating: 4,
-        comment: "Bon rapport qualité-prix, je recommande.",
-        authorAvatar: "/images/avatar-jean.jpg",
-      },
-    ],
-  };
+  const { slug } = await params;
+  const productData = await fetchProductDetails(slug);
+  const reviews = await fetchReviews(slug);
+  const averageRating = reviews.length > 0 
+  ? reviews.reduce((acc:any, review:any) => acc + review.rating, 0) / reviews.length 
+  : 0;
 
-  const relatedProductsData = [
-    {
-      id: "prod-002",
-      name: "Pantalon Chino",
-      price: 89.99,
-      image:
-        "https://images.pexels.com/photos/634785/pexels-photo-634785.jpeg?auto=compress&cs=tinysrgb&w=600",
-      rating: 4.2,
-    },
-    {
-      id: "prod-003",
-      name: "Chemise Blanche",
-      price: 59.99,
-      image:
-        "https://images.pexels.com/photos/1192601/pexels-photo-1192601.jpeg?auto=compress&cs=tinysrgb&w=600",
-      rating: 4.7,
-    },
-  ];
 
-  const questionsData = [
-    {
-      id: "q-001",
-      question: "Ce produit est-il résistant à l'eau ?",
-      answer: "Oui, cette veste est résistante à l'eau, mais pas imperméable.",
-    },
-    {
-      id: "q-002",
-      question: "Quelle est la politique de retour pour cet article ?",
-      answer:
-        "Vous pouvez retourner cet article dans les 30 jours suivant l'achat.",
-    },
-  ];
+ 
+  // const reviewsData = {
+  //   averageRating: 4.5,
+  //   reviews: [
+  //     {
+  //       id: "rev-001",
+  //       author: "Marie Dupont",
+  //       date: "12 novembre 2023",
+  //       rating: 5,
+  //       comment: "Qualité exceptionnelle, très satisfaite de mon achat !",
+  //       authorAvatar: "/images/avatar-marie.jpg",
+  //     },
+  //     {
+  //       id: "rev-002",
+  //       author: "Jean Martin",
+  //       date: "5 octobre 2023",
+  //       rating: 4,
+  //       comment: "Bon rapport qualité-prix, je recommande.",
+  //       authorAvatar: "/images/avatar-jean.jpg",
+  //     },
+  //   ],
+  // };
 
-  const technicalSpecs = [
-    { key: "Matériau", value: "Cuir véritable" },
-    { key: "Doublure", value: "Polyester" },
-    { key: "Fermeture", value: "Zip" },
-    { key: "Entretien", value: "Nettoyage à sec uniquement" },
-  ];
+  // const relatedProductsData = [
+  //   {
+  //     id: "prod-002",
+  //     name: "Pantalon Chino",
+  //     price: 89.99,
+  //     image:
+  //       "https://images.pexels.com/photos/634785/pexels-photo-634785.jpeg?auto=compress&cs=tinysrgb&w=600",
+  //     rating: 4.2,
+  //   },
+  //   {
+  //     id: "prod-003",
+  //     name: "Chemise Blanche",
+  //     price: 59.99,
+  //     image:
+  //       "https://images.pexels.com/photos/1192601/pexels-photo-1192601.jpeg?auto=compress&cs=tinysrgb&w=600",
+  //     rating: 4.7,
+  //   },
+  // ];
 
-  const deliveryAndReturns = {
-    delivery: "Livraison gratuite sous 3-5 jours ouvrables.",
-    returns: "Retours gratuits sous 30 jours.",
-  };
+  // const technicalSpecs = [
+  //   { key: "Matériau", value: "Cuir véritable" },
+  //   { key: "Doublure", value: "Polyester" },
+  //   { key: "Fermeture", value: "Zip" },
+  //   { key: "Entretien", value: "Nettoyage à sec uniquement" },
+  // ];
+
+  // const deliveryAndReturns = {
+  //   delivery: "Livraison gratuite sous 3-5 jours ouvrables.",
+  //   returns: "Retours gratuits sous 30 jours.",
+  // };
 
   return (
     <Box
@@ -120,32 +125,33 @@ const ProductDetailsPage: React.FC = () => {
     >
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={4}>
-          {/* Galerie d'images */}
+          {/* Galerie d'images*/}
+
           <Grid item xs={12} md={4}>
             <ProductImageGallery
               images={productData.images}
               alt={productData.name}
-              sx={{ borderRadius: 2, overflow: "hidden" }}
             />
           </Grid>
 
-          {/* Informations du produit */}
           <Grid item xs={12} md={5}>
             <Paper elevation={1} sx={{ p: 3, backgroundColor: "#f9f9f9" }}>
               <ProductInfo
+                id={productData.id}
                 name={productData.name}
                 price={productData.price}
                 description={productData.description}
-                rating={productData.rating}
-                reviewCount={productData.reviewCount}
-                inStock={productData.inStock}
+                rating={averageRating}
+                reviewCount={reviews.length}
                 sizes={productData.sizes}
                 colors={productData.colors}
+                inStock={productData.stock === 0 ? false: true || false}
+                image={productData.images[0]}
               />
             </Paper>
           </Grid>
-
-          {/* Section livraison - Maintenant visible sur mobile */}
+          {/* 
+          Section livraison - Maintenant visible sur mobile
           <Grid item xs={12} md={3}>
             <Paper
               elevation={1}
@@ -231,7 +237,7 @@ const ProductDetailsPage: React.FC = () => {
           </Grid>
 
           {/* Caractéristiques Techniques */}
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <Paper elevation={1} sx={{ p: 3, backgroundColor: "#f9f9f9" }}>
               <Typography variant="h6" gutterBottom>
                 Caractéristiques Techniques
@@ -246,22 +252,40 @@ const ProductDetailsPage: React.FC = () => {
                 ))}
               </ul>
             </Paper>
-          </Grid>
+          </Grid> */}
 
+         
           {/* Avis */}
           <Grid item xs={12}>
-            <Paper elevation={1} sx={{ p: 3, backgroundColor: "#f9f9f9" }}>
-              <ProductReviews
-                reviews={reviewsData.reviews}
-                averageRating={reviewsData.averageRating}
-              />
+            <Paper elevation={1}>
+              <ProductReviews reviews={reviews} />
             </Paper>
           </Grid>
+           {/* Section des avis */}
+           <Box sx={{ 
+            mt: 6, 
+            display: 'flex', 
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '100%',
+            maxWidth: '800px',
+            mx: 'auto',
+            px: 2
+          }}>
+            <Typography variant="h5" gutterBottom align="center">
+              Avis clients
+            </Typography>
+            <ReviewForm 
+              productId={productData.id} 
+  
+            />
+          </Box>
+
 
           {/* Produits similaires */}
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <RelatedProducts products={relatedProductsData} sx={{ mt: 2 }} />
-          </Grid>
+          </Grid> */}
 
           {/* Questions/Réponses 
         <Grid item xs={12}>
@@ -281,5 +305,3 @@ const ProductDetailsPage: React.FC = () => {
     </Box>
   );
 };
-
-export default ProductDetailsPage;

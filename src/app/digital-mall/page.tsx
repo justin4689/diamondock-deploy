@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { Store, MapPin, Star } from "lucide-react";
 import Link from "next/link";
+import { fetchShop } from "@/lib/api/shopService";
 
 // Types pour les boutiques
 interface Shop {
@@ -25,33 +26,35 @@ interface Shop {
 }
 
 // Données simulées des boutiques
-const shops: Shop[] = [
-  {
-    id: 1,
-    name: "Électro Premium",
-    description: "Spécialiste en produits électroniques haut de gamme",
-    rating: 4.5,
-    reviewCount: 128,
-    location: "Cocody, Abidjan",
-    image: "https://images.pexels.com/photos/1029243/pexels-photo-1029243.jpeg",
-    productsCount: 450,
-    followers: 1200,
-  },
-  {
-    id: 2,
-    name: "Mode Élégance",
-    description: "Boutique de vêtements et accessoires de luxe",
-    rating: 4.8,
-    reviewCount: 256,
-    location: "Plateau, Abidjan",
-    image: "https://images.pexels.com/photos/1884584/pexels-photo-1884584.jpeg",
-    productsCount: 320,
-    followers: 2300,
-  },
-  // Ajoutez d'autres boutiques...
-];
+// const shops: Shop[] = [
+//   {
+//     id: 1,
+//     name: "Électro Premium",
+//     description: "Spécialiste en produits électroniques haut de gamme",
+//     rating: 4.5,
+//     reviewCount: 128,
+//     location: "Cocody, Abidjan",
+//     image: "https://images.pexels.com/photos/1029243/pexels-photo-1029243.jpeg",
+//     productsCount: 450,
+//     followers: 1200,
+//   },
+//   {
+//     id: 2,
+//     name: "Mode Élégance",
+//     description: "Boutique de vêtements et accessoires de luxe",
+//     rating: 4.8,
+//     reviewCount: 256,
+//     location: "Plateau, Abidjan",
+//     image: "https://images.pexels.com/photos/1884584/pexels-photo-1884584.jpeg",
+//     productsCount: 320,
+//     followers: 2300,
+//   },
+//   // Ajoutez d'autres boutiques...
+// ];
 
-const DigitalMallPage = () => {
+ 
+const DigitalMallPage = async() => {
+  const shops = await fetchShop()
   return (
     <Box
       sx={{
@@ -70,10 +73,10 @@ const DigitalMallPage = () => {
       </Typography>
 
       <Grid container spacing={3} sx={{ mt: 2 }}>
-        {shops.map((shop) => (
+        {shops.map((shop :any) => (
           <Grid item xs={12} sm={6} md={4} key={shop.id}>
             <Link
-              href={`/digital-mall/shop/${shop.id}`}
+              href={`/digital-mall/${shop.id}`}
               style={{ textDecoration: "none" }}
             >
               <Card
@@ -94,8 +97,8 @@ const DigitalMallPage = () => {
                   }}
                 >
                   <img
-                    src={shop.image}
-                    alt={shop.name}
+                    src={shop.image_url || "https://images.pexels.com/photos/1884584/pexels-photo-1884584.jpeg"}
+                    alt={shop.shop_name}
                     style={{
                       width: "100%",
                       height: "100%",
@@ -108,44 +111,49 @@ const DigitalMallPage = () => {
                   <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
                     <Store size={20} className="text-orange-500 mr-2" />
                     <Typography variant="h6" component="h2">
-                      {shop.name}
+                      {shop.shop_name}
                     </Typography>
                   </Box>
 
                   <Typography
                     variant="body2"
                     color="text.secondary"
-                    sx={{ mb: 2, minHeight: 40 }}
+                    sx={{ mb: 2, minHeight: "40px" }}
                   >
-                    {shop.description}
+                    {shop.description || "Aucune description disponible"}
                   </Typography>
 
                   <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
                     <MapPin size={16} className="text-gray-500 mr-1" />
                     <Typography variant="body2" color="text.secondary">
-                      {shop.location}
+                      {shop.city && shop.country ? `${shop.city}, ${shop.country}` : "Emplacement non spécifié"}
                     </Typography>
                   </Box>
 
-                  <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-                    <Rating
-                      value={shop.rating}
-                      readOnly
-                      size="small"
-                      sx={{ mr: 1 }}
-                    />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      mt: 2,
+                      borderTop: "1px solid #eee",
+                      paddingTop: 2
+                    }}
+                  >
+                    {/* <Typography variant="body2" color="text.secondary">
+                      Status: {shop.status === 'active' ? 'Actif' : 'Inactif'}
+                    </Typography> */}
                     <Typography variant="body2" color="text.secondary">
-                      ({shop.reviewCount} avis)
+                      Type: {shop.type === 'beginner' ? 'Débutant' : 'Professionnel'}
                     </Typography>
                   </Box>
 
                   <Box
                     sx={{ display: "flex", justifyContent: "space-end" }}
                   >
-                    <Typography variant="body2">
+                    {/* <Typography variant="body2">
                       {shop.productsCount} produits
                     </Typography>
-                   
+                    */}
                   </Box>
 
                   <Button

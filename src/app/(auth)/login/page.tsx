@@ -8,6 +8,11 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // Import 
 import type { z } from "zod";
 import Image from "next/image";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { LoaderCircle } from 'lucide-react';
+
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
@@ -21,17 +26,34 @@ export default function LoginPage() {
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null); // Ajout de l'état pour l'erreur du backend
+
+  const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
 
   const onSubmit = async (data: LoginFormValues) => {
-    try {
-      // Ajoutez ici votre logique de connexion
-      console.log(data);
-    } catch (error) {
-      console.error(error);
+    const result = await signIn("credentials", {
+      redirect: false,
+      email: data.email,
+      password: data.password,
+    });
+
+    if (result?.error) {
+      setError(result.error);
+      if (
+        result.error ===
+        "Votre compte n'est pas vérifié. Un nouveau code OTP a été envoyé."
+      ) {
+        router.push("/otp");
+      }
+      // Gérer l'erreur d'authentification
+    } else {
+      // Rediriger vers la page d'accueil ou une autre page
+      toast.success("vous etes connecté avec succès");
+      router.push("/");
     }
   };
 
@@ -39,12 +61,22 @@ export default function LoginPage() {
     <main className="min-h-screen bg-gray-50 flex items-center justify-center py-4 md:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow">
         <div className="">
-            <Image  src={"/logo2.png"} alt="logo" width={120} height={120} className="mx-auto"/>
+          <Image
+            src={"/logo2.png"}
+            alt="logo"
+            width={120}
+            height={120}
+            className="mx-auto"
+          />
           <h2 className=" text-center text-3xl font-extrabold text-gray-900">
-            Connectez-vous
+            Connectez-vous 👋 
           </h2>
         </div>
+
         <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
+          {error && ( // Afficher l'erreur du backend en haut du formulaire
+            <div className="text-sm text-red-500 text-center">{error}</div>
+          )}
           <div>
             <label
               htmlFor="email"
@@ -96,11 +128,18 @@ export default function LoginPage() {
             disabled={isSubmitting}
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
           >
-            {isSubmitting ? "Connexion..." : "Se connecter"}
+            {isSubmitting ? (
+              <div className="flex items-center justify-center">
+                <LoaderCircle className="animate-spin mr-2" />
+                <span>Connexion ...</span>
+              </div>
+            ) : (
+              "Se connecter"
+            )}
           </button>
         </form>
         <div className="text-center">
-          <Link href="/reset-password" className="text-black">
+          <Link href="/forgot-password" className="text-black">
             <span className="text-orange-600 hover:text-orange-500">
               Mot de passe oublié ?
             </span>
@@ -115,6 +154,6 @@ export default function LoginPage() {
           </Link>
         </div>
       </div>
-    </main>
+    </main> 
   );
 }
